@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>How to Use OpenCV for Ball Detection</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ball Detection with OpenCV">
+    <meta name="author" content="Domenico Bloisi adapted a 3rd Wave Media template">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> 
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.css">
+        
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="../assets/css/styles.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+</head> 
+
+<body>
+    <!-- ******HEADER****** --> 
+    <header class="header">
+        <div class="container">                       
+            <img class="profile-image img-responsive pull-left" src="./images/ball.png" alt="ball detection"
+			hegiht=100 width=100/>
+            <div class="profile-content pull-left">
+                <h1 class="name">How to Use OpenCV for Ball Detection</h1>
+                <h2 class="desc">RoboCup SPL Use Case</h2>
+           </div>
+
+           <div class="profile-content pull-right">
+
+
+
+
+<!--//profile-->
+            
+
+</div>
+               
+        </div><!--//container-->
+    </header><!--//header-->
+    
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+			
+			    <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Introduction</h2>
+                        <div class="content">
+                            <p>In this tutorial, we will use a supervised method for detecting an object
+							in an image. In particular, we will train a Linear Binary Pattern (LBP) classifier
+							and we will use it for detecting a black and white ball.
+							</p>
+
+							<p>The use case of the <a href="http://spl.robocup.org/">RoboCup Soccer Standard Platform League</a> is used
+							to demonstrate the approach.</p>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+			
+			
+			
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="goals"></a>Goals</h2>
+                        <div class="content">
+                            <p>We will learn how to:  
+                            </p>
+							
+							<p>
+							1. Create a data set with positive and negative samples<br>
+							2. Train a binary classifier<br>
+							3. Detect the object of interest
+							</p>
+                                                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="dataset"></a>Data Set Creation</h2>
+                        <div class="content">
+                            <p>To train the binary classifier we need a positive and a negative set of images.
+							<br>
+							&nbsp;
+							</p>
+							<div class="item row">
+                                
+								<a class="col-md-4 col-sm-4 col-xs-12">
+                                <img class="img-responsive project-image"
+                                    <img src="images/positive.png" alt="positive images icon" />
+                                </a>
+                                <div class="desc col-md-8 col-sm-8 col-xs-12">
+                                    <h3 class="title">Positive set</h3>
+                                    <p>It is crucial to generate accurately the positive set to obtain good results.
+							We need to select image patch containing the object of interest trying to mantain
+							the same proportion for each selected patch.
+							To this end, we can use a graphical tool to crop the images.
+							<a href="https://github.com/dbloisi/cropping" target="_blank">
+							Cropping</a> is a tool for creating image patches that can be used for machine learning
+							with Haar or LBP based classifiers.
+							<a href="https://github.com/dbloisi/cropping" target="_blank">
+							Cropping</a> allows to select with the mouse and to save image patches
+							with a constant proportion, which is crucial for generating a good
+							positive sample set.</p>
+									
+							<p>An example of positive sample set containing image patches of
+							black and white balls captured from the top camera of a NAO robot is available
+							<a href="data/pos_top.zip">here</a>.</p>
+							
+							<p>Additional images can be downloaded from the <a href="http://www.dis.uniroma1.it/~labrococo/?q=node/459" target="_blank">SPQR Team NAO image data set</a>.</p>
+							
+                                </div><!--//desc-->                          
+                            </div><!--//item-->
+							
+							<hr class="divider" />
+							
+							<div class="item row">
+                                
+								<a class="col-md-4 col-sm-4 col-xs-12">
+                                <img class="img-responsive project-image"
+                                    <img src="images/negative.png" alt="negative images icon" />
+                                </a>
+                                <div class="desc col-md-8 col-sm-8 col-xs-12">
+                                    <h3 class="title">Negative set</h3>
+                                    <p>The images that are included in the negative set do not have to contain
+							the object that we want to detect. If we know in advance which will be the application
+							scenario for our detector, then it could be good to use images taken from it.
+							The number of negative samples to use should be bigger than
+							the number of positive samples. Generally, a proportion
+							of 2:1 between negative and positive samples is considered
+							accettable, i.e., if the number of positive samples
+							is 2,000 then the negative samples sould be at least 4,000.</p>
+							
+							<p>An example of negative sample set containing no black and white balls
+							captured from the top camera of a NAO robot is available
+							<a href="data/neg_top.zip">here</a>.
+							Part of the images in this negative data set has been provided by
+							the <a href="http://www.informatik.uni-bremen.de/agebv/" target="_blank">
+							Multi-Sensor Interactive Group</a> at the University of Bremen (Germany).</p>
+							
+							<p>Additional images can be downloaded from the <a href="http://www.dis.uniroma1.it/~labrococo/?q=node/459" target="_blank">SPQR Team NAO image data set</a>.</p>
+									
+                                </div><!--//desc-->                          
+                            </div><!--//item-->
+							
+                                                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Training</h2>
+                        <div class="content">
+                            <p>In this tutorial, we use an approach based on OpenCV for the cascade classifier training.
+							The details about the OpenCV approach can be found
+							<a href="http://docs.opencv.org/2.4.13.2/doc/user_guide/ug_traincascade.html" target="_blank">here</a>.
+                            </p>
+							
+							<p>We assume the following directory structure:<br>
+							<font color="blue"> 
+							/balldetection<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;pos_top<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img1.png<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img2.png<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;neg_top<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img3.png<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img4.png<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;createpos.cpp<br>
+							</font>
+							</p>
+								
+								
+							<h3>Create the positive training data</h3>
+							<p>All the image patches in the set of positive samples have to be listed in a text file.
+							This text file should be formatted to adere to the needs of the OpenCV function
+							<code>opencv_createsamples</code></p>
+							
+							<p>You can use the C++ file <a href="createpos.cpp">createpos.cpp</a> to create
+							a file named "positives.txt" in a format suitable for OpenCV. Use for example
+							<code>g++ createpos.cpp -o createpos -lws2_32</code> for compiling it under Windows with MinGW.</p>							
+							
+							The command lists for
+							creating the text file is:</p>
+							
+							<p>
+							<code>cd balldetection</code>
+							</p>
+							
+							<p>
+							<code>createpos pos_top</code>
+							</p>
+							
+							<p>
+							<code>opencv_createsamples -info positives.txt -w 16 -h 16 -vec pos.vec -num 2728</code>
+                            </p>
+							
+							where<br>
+							
+							<ul>
+								<li><b>positives.txt</b> contains the list of the positive patches
+							that will be used for training the classifier</li>
+								<li><b>w</b> is the width of the search window</li>
+								<li><b>h</b> is the height of the search window</li>
+								<li><b>vec</b> is a vector file of positive samples in the OpenCV format</li>
+								<li><b>num</b> is the total number of positive samples
+							</ul>
+							
+							<p>We experimentyally found that 16x16 is a good window size for our application scenario where we wantto find a black and white ball.
+							If you need to detect a bigger object maybe a bigger window size (e.g, 24x24) could work better, or if you want to detect a 
+							rectangular object (e.g., a <a href="http://coding-robin.de/2013/07/22/train-your-own-opencv-haar-classifier.html">banana</a>), then you could decide to use a rectangular window like 60x30.
+							
+							<p>Once completed the above steps, our directory structure is:<br>
+							<font color="blue"> 
+							/balldetection<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;pos_top<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;neg_top<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;createpos.cpp<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;positives.txt<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;pos.vec<br>
+							</font>
+							</p>
+							
+							<h3>Create the negative training data</h3>
+							<p>All the images in the set of negative samples have to be listed in a text file.
+							For example, in Windows the command lists for
+							creating the text file is:</p>
+							
+							<p>
+							<code>dir /b/s .\neg_top\*.png > negatives.txt</code>
+							</p>
+							
+							<p>Once completed the above steps, our directory structure is:<br>
+							<font color="blue"> 
+							/balldetection<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;pos_top<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;neg_top<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;createpos.cpp<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;positives.txt<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;pos.vec<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;negatives.txt<br>
+							</font>
+							</p>
+							
+							
+							<h3>Train the classifier</h3>
+							<p>To train the classifier it is possible to use the OpenCV method <code>opencv_traincascade</code>,
+							but before we need to create an empty folder named "classifier".<br>
+							Our directory structure is now:<br>
+							<font color="blue">
+							/balldetection<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;classifier<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;pos_top<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;neg_top<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;createpos.cpp<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;positives.txt<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;pos.vec<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;negatives.txt<br>
+							</font>
+							</p>
+													
+							
+							<p>
+							<code>opencv_traincascade -data classifier -vec pos.vec -bg negatives.txt -numStages 20 -minHitRate 0.999
+							-maxFalseAlarmRate 0.5 -numPos 2728 -numNeg 16000 -w 16 -h 16 -mode ALL -precalcValBufSize 256
+							-precalcIdxBufSize 256 -acceptanceRatioBreakValue 10e-5 -nonsym -baseFormatSave -featureType LBP</code>
+							</p>
+							
+							<p>For the meaning of the parameters please refer to the
+							<a href="http://docs.opencv.org/2.4.13.2/doc/user_guide/ug_traincascade.html">OpenCV documentation</a>.
+							It is important to note the use of the parameter <b>nonsym</b> since in the case of the
+							black and white ball the pattern is not symmetric in all possible views.
+							</p>
+							
+							<p>An example of a classifier generated with the OpenCV tools is available <a href="ball_cascade.xml">here</a>.</p>
+							
+							<p>Two pre-trained classifiers (one for the top and one for the bottom camera) can be downloaded from the
+							<a href="http://www.dis.uniroma1.it/~labrococo/?q=node/459" target="_blank">SPQR Team NAO image data set</a> web page.</p>
+							
+							
+							
+							
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Detection</h2>
+                        <div class="content">
+                            <p>The detection of the object of interest can be carried out on single images by using the cascade classifer generated as decribed above.
+                            </p>
+							
+							<p>A code example for performing the detection using OpenCV function <code>detectMultiScale</code> is available on
+							<a href="https://github.com/dbloisi/detectball" target="_blank">GitHub</a> or can be downloaded <a href="detectball.zip">here</a>.
+							</p>
+							
+							<p>The code example contains 30 images used to test the classifier. By changing the parameters of the
+                             function <code>detectMultiScale</code> it is possible to tune the classifier for different scenarios.
+							</p>
+
+							<p>The image below shows four examples of detection using an LBP classifier.
+							</p>
+							<p>
+							<img src="./images/detectball-examples.png" alt="detectball-examples" style="height:250px;">
+							</p>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+	
+	
+               <section class="latest section">
+                    <div class="section-inner">
+                        <h2 class="heading">Results</h2>
+                        <div class="content">    
+                                               
+                            <div class="item featured text-center">
+                                
+                                <p class="summary">
+                                   Results in a real environment
+                                </p>
+                                <div class="featured-image">
+								    
+								<iframe src="https://www.youtube.com/embed/pgYkccCuZT4?ecver=2" width="598" height="336" frameborder="0" allowfullscreen></iframe>
+								</div>
+                                    
+                                <div class="desc text-left">
+                                    <p>&nbsp;</p>                                  
+                                    <p>The ball detector described in this tutorial has been used by the
+									<a href="http://spqr.diag.uniroma1.it/" target="_blank">SPQR Robot Soccer Team</a> during the
+									competitions of the
+									<a href="https://www.robocupgermanopen.de/en/major/spl" target="_blank">Robocup German Open 2017</a> and
+									is part of the Fireball realease available on <a title="SPQR Ball Perceptor" href="https://github.com/SPQRTeam/SPQRBallPerceptor">GitHub</a>.</p>
+									<div class="featured-image">
+                                    <iframe src="https://www.youtube.com/embed/KFxiFpezvw0?ecver=2" width="598" height="336" frameborder="0" allowfullscreen></iframe>
+									</div>
+								</div>
+                                </div><!--//desc-->      
+                                                
+                            </div><!--//item-->
+							
+							<div class="item featured text-center">
+                                
+                                <p class="summary">
+                                   Indoor and outdoor tests
+                                </p>
+                                <div class="featured-image">
+								    
+								<iframe src="https://www.youtube.com/embed/fIgEwHRe6Bk?ecver=2" width="598" height="336" frameborder="0" allowfullscreen></iframe>
+								
+								</div>
+                                    
+                                <div class="desc text-left">
+                                    <p>&nbsp;</p>                                  
+                                    <p>We tested the ball detector both indoor and outdoor.
+                                    </p>
+                                    
+                                </div><!--//desc-->      
+                                                
+                            </div><!--//item-->
+							
+                            
+                        </div><!--//content-->  
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+                
+                               
+                
+            </div><!--//primary-->
+            
+			<div class="secondary col-md-4 col-sm-12 col-xs-12">
+                <aside class="info aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Author</h2>
+                        <div class="content">
+                            <p><a href="http://profs.scienze.univr.it/~bloisi/">Domenico D. Bloisi</a></p>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </aside><!--//aside-->                        
+				
+				<aside class="education aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Table of Contents</h2>
+                        <div class="content">
+                            <p>
+							<a href="#goals">Goals</a>
+							</p>
+							<p>
+							<a href="#dataset">Data Set Creation</a>
+							</p>
+							<p>
+							<a href="#training">Training</a>
+							</p>
+							<p>
+							<a href="#detection">Detection</a>
+							</p>
+							<p>
+							<a href="#results">Results</a>
+							</p>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//section-->	
+
+				<aside class="education aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Credits</h2>
+                        <div class="content">
+						    <p>
+							Francesco Del Duchetto
+							</p>
+                            <p>
+							Vincenzo Suriani
+							</p>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//section-->				
+                             
+                <aside class="blog aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Links</h2>
+						<div class="content">
+							<div class="item">
+								<a href="http://profs.scienze.univr.it/~bloisi/" target="_blank">Domenico Bloisi's home page</a>
+							</div>
+							<div class="item">
+								<a href="http://spqr.diag.uniroma1.it/" target="_blank">SPQR Robot Soccer Team</a>
+								<img class="img-responsive project-image"
+                                     src="../assets/images/logo-icon-spqr-spl.png" alt="logo spqr spl" />
+							</div>
+
+							<div class="item">
+								<a href="http://spl.robocup.org/" target="_blank">RoboCup Standard Platform League</a>
+                            </div>
+
+							<div class="item">
+								<a href="http://opencv.org/" target="_blank">OpenCV</a>
+                            </div>
+							
+							<div class="item">
+								<a href="http://coding-robin.de/2013/07/22/train-your-own-opencv-haar-classifier.html" target="_blank">Train your own OpenCV Haar classifier</a>
+                            </div>
+							
+							
+
+
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//section-->                            
+              
+            </div><!--//secondary-->    
+        </div><!--//row-->
+    </div><!--//masonry-->
+    
+    <!-- ******FOOTER****** --> 
+    <footer class="footer">
+        <div class="container text-center">
+                <small class="copyright">This template adapted from <a href="http://themes.3rdwavemedia.com" target="_blank">3rd Wave Media</a></small>
+        </div><!--//container-->
+    </footer><!--//footer-->
+ 
+ 
+</body>
+</html> 
+

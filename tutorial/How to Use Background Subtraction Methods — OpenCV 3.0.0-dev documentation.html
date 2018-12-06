@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0125)http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#background-subtraction -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/ga.js.download"></script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33108845-1']);
+  _gaq.push(['_setDomainName', 'opencv.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+  
+    
+    
+    <title>How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation</title>
+    
+    <link rel="stylesheet" href="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/default.css" type="text/css">
+    <link rel="stylesheet" href="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/pygments.css" type="text/css">
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '3.0.0-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/jquery.js.download"></script>
+    <script type="text/javascript" src="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/underscore.js.download"></script>
+    <script type="text/javascript" src="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/doctools.js.download"></script>
+    <script type="text/javascript" src="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/insertIframe.js.download"></script>
+    <link rel="top" title="OpenCV 3.0.0-dev documentation" href="http://docs.opencv.org/3.0-beta/index.html">
+    <link rel="up" title="video module. Video analysis" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/table_of_content_video/table_of_content_video.html">
+    <link rel="next" title="objdetect module. Object Detection" href="http://docs.opencv.org/3.0-beta/doc/tutorials/objdetect/table_of_content_objdetect/table_of_content_objdetect.html">
+    <link rel="prev" title="video module. Video analysis" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/table_of_content_video/table_of_content_video.html">
+    <link href="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      table.right { float: right; margin-left: 20px; }
+      table.right td { border: 1px solid #ccc; }
+    </style>
+    <script type="text/javascript">
+      // intelligent scrolling of the sidebar content
+      $(window).scroll(function() {
+        var sb = $('.sphinxsidebarwrapper');
+        var win = $(window);
+        var sbh = sb.height();
+        var offset = $('.sphinxsidebar').position()['top'];
+        var wintop = win.scrollTop();
+        var winbot = wintop + win.innerHeight();
+        var curtop = sb.position()['top'];
+        var curbot = curtop + sbh;
+        // does sidebar fit in window?
+        if (sbh < win.innerHeight()) {
+          // yes: easy case -- always keep at the top
+          sb.css('top', $u.min([$u.max([0, wintop - offset - 10]),
+                                $(document).height() - sbh - 200]));
+        } else {
+          // no: only scroll if top/bottom edge of sidebar is at
+          // top/bottom edge of window
+          if (curtop > wintop && curbot > winbot) {
+            sb.css('top', $u.max([wintop - offset - 10, 0]));
+          } else if (curtop < wintop && curbot < winbot) {
+            sb.css('top', $u.min([winbot - sbh - offset - 20,
+                                  $(document).height() - sbh - 200]));
+          }
+        }
+      });
+    </script>
+
+  </head>
+    <body><div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="http://docs.opencv.org/3.0-beta/genindex.html" title="General Index" accesskey="I">index</a></li>
+        <li class="right">
+          <a href="http://docs.opencv.org/3.0-beta/doc/tutorials/objdetect/table_of_content_objdetect/table_of_content_objdetect.html" title="objdetect module. Object Detection" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/table_of_content_video/table_of_content_video.html" title="video module. Video analysis" accesskey="P">previous</a> |</li>
+        <li><a href="http://docs.opencv.org/3.0-beta/index.html">OpenCV 3.0.0-dev documentation</a> »</li>
+          <li><a href="http://docs.opencv.org/3.0-beta/doc/tutorials/tutorials.html">OpenCV Tutorials</a> »</li>
+          <li><a href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/table_of_content_video/table_of_content_video.html" accesskey="U"><em>video</em> module. Video analysis</a> »</li> 
+      </ul>
+    </div>  
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper" style="top: 47px;">
+            <p class="logo"><a href="http://docs.opencv.org/3.0-beta/index.html">
+              <img class="logo" src="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/opencv-logo2.png" alt="Logo">
+            </a></p>
+<div id="searchbox">
+  <h3>Quick search</h3>
+    <form class="search" action="http://docs.opencv.org/3.0-beta/search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+  <h3><a href="http://docs.opencv.org/3.0-beta/index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#">How to Use Background Subtraction Methods</a><ul>
+<li><a class="reference internal" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#goals">Goals</a></li>
+<li><a class="reference internal" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#code">Code</a></li>
+<li><a class="reference internal" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#explanation">Explanation</a></li>
+<li><a class="reference internal" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#results">Results</a></li>
+<li><a class="reference internal" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#evaluation">Evaluation</a></li>
+<li><a class="reference internal" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/table_of_content_video/table_of_content_video.html" title="previous chapter"><em>video</em> module. Video analysis</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="http://docs.opencv.org/3.0-beta/doc/tutorials/objdetect/table_of_content_objdetect/table_of_content_objdetect.html" title="next chapter"><em>objdetect</em> module. Object Detection</a></p>
+        </div>
+      </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-to-use-background-subtraction-methods">
+<span id="background-subtraction"></span><h1>How to Use Background Subtraction Methods<a class="headerlink" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#how-to-use-background-subtraction-methods" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">Background subtraction (BS) is a common and widely used technique for generating a foreground mask (namely, a binary image containing the pixels belonging to moving objects in the scene) by using static cameras.</p>
+</li>
+<li><p class="first">As the name suggests, BS calculates the foreground mask performing a subtraction between the current frame and a background model, containing the static part of the scene or, more in general, everything that can be considered as background given the characteristics of the observed scene.</p>
+<img alt="Background Subtraction - General Scheme" class="align-center" src="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/Background_Subtraction_Tutorial_Scheme.png">
+</li>
+<li><p class="first">Background modeling consists of two main steps:</p>
+<ol class="arabic simple">
+<li>Background Initialization;</li>
+<li>Background Update.</li>
+</ol>
+<p>In the first step, an initial model of the background is computed, while in the second step that model is updated in order to adapt to possible changes in the scene.</p>
+</li>
+<li><p class="first">In this tutorial we will learn how to perform BS by using OpenCV. As input, we will use data coming from the publicly available data set <a class="reference external" href="http://bmc.univ-bpclermont.fr/">Background Models Challenge (BMC)</a> .</p>
+</li>
+</ul>
+<div class="section" id="goals">
+<h2>Goals<a class="headerlink" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#goals" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial you will learn how to:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Read data from videos by using <a class="reference external" href="http://docs.opencv.org/modules/videoio/doc/reading_and_writing_video.html?highlight=videocapture#videocapture">VideoCapture</a> or image sequences by using <a class="reference external" href="http://docs.opencv.org/modules/imgcodecs/doc/reading_and_writing_images.html?highlight=imread#imread">imread</a>;</li>
+<li>Create and update the background model by using <a class="reference external" href="http://docs.opencv.org/modules/video/doc/motion_analysis_and_object_tracking.html?highlight=backgroundsubtractor#backgroundsubtractor">BackgroundSubtractor</a> class;</li>
+<li>Get and show the foreground mask by using <a class="reference external" href="http://docs.opencv.org/modules/highgui/doc/user_interface.html?highlight=imshow#imshow">imshow</a>;</li>
+<li>Save the output by using <a class="reference external" href="http://docs.opencv.org/modules/imgcodecs/doc/reading_and_writing_images.html?highlight=imwrite#imwrite">imwrite</a> to quantitatively evaluate the results.</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#code" title="Permalink to this headline">¶</a></h2>
+<p>In the following you can find the source code. We will let the user chose to process either a video file or a sequence of images.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Two different methods are used to generate two foreground masks:</dt>
+<dd><ol class="first last arabic simple">
+<li><a class="reference external" href="http://docs.opencv.org/modules/video/doc/motion_analysis_and_object_tracking.html?highlight=backgroundsubtractorMOG#backgroundsubtractormog">MOG</a></li>
+<li><a class="reference external" href="http://docs.opencv.org/modules/video/doc/motion_analysis_and_object_tracking.html?highlight=backgroundsubtractorMOG2#backgroundsubtractormog2">MOG2</a></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The results as well as the input data are shown on the screen.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">//opencv</span>
+<span class="cp">#include &lt;opencv2/highgui/highgui.hpp&gt;</span>
+<span class="cp">#include &lt;opencv2/video/background_segm.hpp&gt;</span>
+<span class="c1">//C</span>
+<span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="c1">//C++</span>
+<span class="cp">#include &lt;iostream&gt;</span>
+<span class="cp">#include &lt;sstream&gt;</span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">cv</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="c1">//global variables</span>
+<span class="n">Mat</span> <span class="n">frame</span><span class="p">;</span> <span class="c1">//current frame</span>
+<span class="n">Mat</span> <span class="n">fgMaskMOG</span><span class="p">;</span> <span class="c1">//fg mask generated by MOG method</span>
+<span class="n">Mat</span> <span class="n">fgMaskMOG2</span><span class="p">;</span> <span class="c1">//fg mask fg mask generated by MOG2 method</span>
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BackgroundSubtractor</span><span class="o">&gt;</span> <span class="n">pMOG</span><span class="p">;</span> <span class="c1">//MOG Background subtractor</span>
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BackgroundSubtractor</span><span class="o">&gt;</span> <span class="n">pMOG2</span><span class="p">;</span> <span class="c1">//MOG2 Background subtractor</span>
+<span class="kt">int</span> <span class="n">keyboard</span><span class="p">;</span>
+
+<span class="c1">//function declarations</span>
+<span class="kt">void</span> <span class="nf">help</span><span class="p">();</span>
+<span class="kt">void</span> <span class="nf">processVideo</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">videoFilename</span><span class="p">);</span>
+<span class="kt">void</span> <span class="nf">processImages</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">firstFrameFilename</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">help</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">cout</span>
+  <span class="o">&lt;&lt;</span> <span class="s">"--------------------------------------------------------------------------"</span>  <span class="o">&lt;&lt;</span> <span class="n">endl</span>
+  <span class="o">&lt;&lt;</span> <span class="s">"This program shows how to use background subtraction methods provided by "</span>   <span class="o">&lt;&lt;</span> <span class="n">endl</span>
+  <span class="o">&lt;&lt;</span> <span class="s">" OpenCV. You can process both videos (-vid) and images (-img)."</span>              <span class="o">&lt;&lt;</span> <span class="n">endl</span>
+                                                                                   <span class="o">&lt;&lt;</span> <span class="n">endl</span>
+  <span class="o">&lt;&lt;</span> <span class="s">"Usage:"</span>                                                                      <span class="o">&lt;&lt;</span> <span class="n">endl</span>
+  <span class="o">&lt;&lt;</span> <span class="s">"./bs {-vid &lt;video filename&gt;|-img &lt;image filename&gt;}"</span>                          <span class="o">&lt;&lt;</span> <span class="n">endl</span>
+  <span class="o">&lt;&lt;</span> <span class="s">"for example: ./bs -vid video.avi"</span>                                            <span class="o">&lt;&lt;</span> <span class="n">endl</span>
+  <span class="o">&lt;&lt;</span> <span class="s">"or: ./bs -img /data/images/1.png"</span>                                            <span class="o">&lt;&lt;</span> <span class="n">endl</span>
+  <span class="o">&lt;&lt;</span> <span class="s">"--------------------------------------------------------------------------"</span>  <span class="o">&lt;&lt;</span> <span class="n">endl</span>
+  <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+  <span class="c1">//print help information</span>
+  <span class="n">help</span><span class="p">();</span>
+
+  <span class="c1">//check for the input parameter correctness</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span><span class="s">"Incorret input list"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span><span class="s">"exiting..."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">//create GUI windows</span>
+  <span class="n">namedWindow</span><span class="p">(</span><span class="s">"Frame"</span><span class="p">);</span>
+  <span class="n">namedWindow</span><span class="p">(</span><span class="s">"FG Mask MOG"</span><span class="p">);</span>
+  <span class="n">namedWindow</span><span class="p">(</span><span class="s">"FG Mask MOG 2"</span><span class="p">);</span>
+
+  <span class="c1">//create Background Subtractor objects</span>
+  <span class="n">pMOG</span> <span class="o">=</span> <span class="n">createBackgroundSubtractorMOG</span><span class="p">();</span> <span class="c1">//MOG approach</span>
+  <span class="n">pMOG2</span> <span class="o">=</span> <span class="n">createBackgroundSubtractorMOG2</span><span class="p">();</span> <span class="c1">//MOG2 approach</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">"-vid"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//input data coming from a video</span>
+    <span class="n">processVideo</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">"-img"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//input data coming from a sequence of images</span>
+    <span class="n">processImages</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">//error in reading input parameters</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span><span class="s">"Please, check the input parameters."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span><span class="s">"Exiting..."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">EXIT_FAILURE</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">//destroy GUI windows</span>
+  <span class="n">destroyAllWindows</span><span class="p">();</span>
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">processVideo</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">videoFilename</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//create the capture object</span>
+  <span class="n">VideoCapture</span> <span class="n">capture</span><span class="p">(</span><span class="n">videoFilename</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">capture</span><span class="p">.</span><span class="n">isOpened</span><span class="p">()){</span>
+    <span class="c1">//error in opening the video input</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Unable to open video file: "</span> <span class="o">&lt;&lt;</span> <span class="n">videoFilename</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">//read input data. ESC or 'q' for quitting</span>
+  <span class="k">while</span><span class="p">(</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">keyboard</span> <span class="o">!=</span> <span class="sc">'q'</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">keyboard</span> <span class="o">!=</span> <span class="mi">27</span> <span class="p">){</span>
+    <span class="c1">//read the current frame</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">capture</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">frame</span><span class="p">))</span> <span class="p">{</span>
+      <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Unable to read next frame."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+      <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Exiting..."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+      <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">//update the background model</span>
+    <span class="n">pMOG</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">fgMaskMOG</span><span class="p">);</span>
+    <span class="n">pMOG2</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">fgMaskMOG2</span><span class="p">);</span>
+    <span class="c1">//get the frame number and write it on the current frame</span>
+    <span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+    <span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+              <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">capture</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">CAP_PROP_POS_FRAMES</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">frameNumberString</span> <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+    <span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">frameNumberString</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+            <span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.5</span> <span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+    <span class="c1">//show the current frame and the fg masks</span>
+    <span class="n">imshow</span><span class="p">(</span><span class="s">"Frame"</span><span class="p">,</span> <span class="n">frame</span><span class="p">);</span>
+    <span class="n">imshow</span><span class="p">(</span><span class="s">"FG Mask MOG"</span><span class="p">,</span> <span class="n">fgMaskMOG</span><span class="p">);</span>
+    <span class="n">imshow</span><span class="p">(</span><span class="s">"FG Mask MOG 2"</span><span class="p">,</span> <span class="n">fgMaskMOG2</span><span class="p">);</span>
+    <span class="c1">//get the input from the keyboard</span>
+    <span class="n">keyboard</span> <span class="o">=</span> <span class="n">waitKey</span><span class="p">(</span> <span class="mi">30</span> <span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">//delete capture object</span>
+  <span class="n">capture</span><span class="p">.</span><span class="n">release</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">processImages</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">fistFrameFilename</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//read the first file of the sequence</span>
+  <span class="n">frame</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">fistFrameFilename</span><span class="p">);</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">frame</span><span class="p">.</span><span class="n">data</span><span class="p">){</span>
+    <span class="c1">//error in opening the first image</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Unable to open first image frame: "</span> <span class="o">&lt;&lt;</span> <span class="n">fistFrameFilename</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">//current image filename</span>
+  <span class="n">string</span> <span class="n">fn</span><span class="p">(</span><span class="n">fistFrameFilename</span><span class="p">);</span>
+  <span class="c1">//read input data. ESC or 'q' for quitting</span>
+  <span class="k">while</span><span class="p">(</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">keyboard</span> <span class="o">!=</span> <span class="sc">'q'</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">keyboard</span> <span class="o">!=</span> <span class="mi">27</span> <span class="p">){</span>
+    <span class="c1">//update the background model</span>
+    <span class="n">pMOG</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">fgMaskMOG</span><span class="p">);</span>
+    <span class="n">pMOG2</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">fgMaskMOG2</span><span class="p">);</span>
+    <span class="c1">//get the frame number and write it on the current frame</span>
+    <span class="kt">size_t</span> <span class="n">index</span> <span class="o">=</span> <span class="n">fn</span><span class="p">.</span><span class="n">find_last_of</span><span class="p">(</span><span class="s">"/"</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">string</span><span class="o">::</span><span class="n">npos</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">index</span> <span class="o">=</span> <span class="n">fn</span><span class="p">.</span><span class="n">find_last_of</span><span class="p">(</span><span class="s">"</span><span class="se">\\</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kt">size_t</span> <span class="n">index2</span> <span class="o">=</span> <span class="n">fn</span><span class="p">.</span><span class="n">find_last_of</span><span class="p">(</span><span class="s">"."</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">prefix</span> <span class="o">=</span> <span class="n">fn</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">suffix</span> <span class="o">=</span> <span class="n">fn</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">index2</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">frameNumberString</span> <span class="o">=</span> <span class="n">fn</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">index2</span><span class="o">-</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">istringstream</span> <span class="n">iss</span><span class="p">(</span><span class="n">frameNumberString</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">frameNumber</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">iss</span> <span class="o">&gt;&gt;</span> <span class="n">frameNumber</span><span class="p">;</span>
+    <span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+              <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">frameNumberString</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+            <span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.5</span> <span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+    <span class="c1">//show the current frame and the fg masks</span>
+    <span class="n">imshow</span><span class="p">(</span><span class="s">"Frame"</span><span class="p">,</span> <span class="n">frame</span><span class="p">);</span>
+    <span class="n">imshow</span><span class="p">(</span><span class="s">"FG Mask MOG"</span><span class="p">,</span> <span class="n">fgMaskMOG</span><span class="p">);</span>
+    <span class="n">imshow</span><span class="p">(</span><span class="s">"FG Mask MOG 2"</span><span class="p">,</span> <span class="n">fgMaskMOG2</span><span class="p">);</span>
+    <span class="c1">//get the input from the keyboard</span>
+    <span class="n">keyboard</span> <span class="o">=</span> <span class="n">waitKey</span><span class="p">(</span> <span class="mi">30</span> <span class="p">);</span>
+    <span class="c1">//search for the next image in the sequence</span>
+    <span class="n">ostringstream</span> <span class="n">oss</span><span class="p">;</span>
+    <span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">frameNumber</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">string</span> <span class="n">nextFrameNumberString</span> <span class="o">=</span> <span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+    <span class="n">string</span> <span class="n">nextFrameFilename</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">nextFrameNumberString</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">;</span>
+    <span class="c1">//read the next frame</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">nextFrameFilename</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">frame</span><span class="p">.</span><span class="n">data</span><span class="p">){</span>
+      <span class="c1">//error in opening the next image in the sequence</span>
+      <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Unable to open image frame: "</span> <span class="o">&lt;&lt;</span> <span class="n">nextFrameFilename</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+      <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">//update the path of the current frame</span>
+    <span class="n">fn</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">nextFrameFilename</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>The source file can be downloaded <a class="reference download internal" href="http://docs.opencv.org/3.0-beta/_downloads/bg_sub.cpp"><tt class="xref download docutils literal"><span class="pre">here</span></tt></a>.</li>
+</ul>
+</div>
+<div class="section" id="explanation">
+<h2>Explanation<a class="headerlink" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#explanation" title="Permalink to this headline">¶</a></h2>
+<p>We discuss the main parts of the above code:</p>
+<ol class="arabic">
+<li><p class="first">First, three Mat objects are allocated to store the current frame and two foreground masks, obtained by using two different BS algorithms.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Mat</span> <span class="n">frame</span><span class="p">;</span> <span class="c1">//current frame</span>
+<span class="n">Mat</span> <span class="n">fgMaskMOG</span><span class="p">;</span> <span class="c1">//fg mask generated by MOG method</span>
+<span class="n">Mat</span> <span class="n">fgMaskMOG2</span><span class="p">;</span> <span class="c1">//fg mask fg mask generated by MOG2 method</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Two <a class="reference external" href="http://docs.opencv.org/modules/video/doc/motion_analysis_and_object_tracking.html?highlight=backgroundsubtractor#backgroundsubtractor">BackgroundSubtractor</a> objects will be used to generate the foreground masks. In this example, default parameters are used, but it is also possible to declare specific parameters in the create function.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BackgroundSubtractor</span><span class="o">&gt;</span> <span class="n">pMOG</span><span class="p">;</span> <span class="c1">//MOG Background subtractor</span>
+<span class="n">Ptr</span><span class="o">&lt;</span><span class="n">BackgroundSubtractor</span><span class="o">&gt;</span> <span class="n">pMOG2</span><span class="p">;</span> <span class="c1">//MOG2 Background subtractor</span>
+<span class="p">...</span>
+<span class="c1">//create Background Subtractor objects</span>
+<span class="n">pMOG</span> <span class="o">=</span> <span class="n">createBackgroundSubtractorMOG</span><span class="p">();</span> <span class="c1">//MOG approach</span>
+<span class="n">pMOG2</span> <span class="o">=</span> <span class="n">createBackgroundSubtractorMOG2</span><span class="p">();</span> <span class="c1">//MOG2 approach</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The command line arguments are analysed. The user can chose between two options:</p>
+<ul class="simple">
+<li>video files (by choosing the option -vid);</li>
+<li>image sequences (by choosing the option -img).</li>
+</ul>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">"-vid"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//input data coming from a video</span>
+  <span class="n">processVideo</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">"-img"</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//input data coming from a sequence of images</span>
+  <span class="n">processImages</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Suppose you want to process a video file. The video is read until the end is reached or the user presses the button ‘q’ or the button ‘ESC’.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="k">while</span><span class="p">(</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">keyboard</span> <span class="o">!=</span> <span class="sc">'q'</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">keyboard</span> <span class="o">!=</span> <span class="mi">27</span> <span class="p">){</span>
+  <span class="c1">//read the current frame</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">capture</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">frame</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Unable to read next frame."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Exiting..."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Every frame is used both for calculating the foreground mask and for updating the background. If you want to change the learning rate used for updating the background model, it is possible to set a specific learning rate by passing a third parameter to the ‘apply’ method.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">//update the background model</span>
+<span class="n">pMOG</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">fgMaskMOG</span><span class="p">);</span>
+<span class="n">pMOG2</span><span class="o">-&gt;</span><span class="n">apply</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">fgMaskMOG2</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The current frame number can be extracted from the <a class="reference external" href="http://docs.opencv.org/modules/videoio/doc/reading_and_writing_video.html?highlight=videocapture#videocapture">VideoCapture</a> object and stamped in the top left corner of the current frame. A white rectangle is used to highlight the black colored frame number.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">//get the frame number and write it on the current frame</span>
+<span class="n">stringstream</span> <span class="n">ss</span><span class="p">;</span>
+<span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span>
+          <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">ss</span> <span class="o">&lt;&lt;</span> <span class="n">capture</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">CAP_PROP_POS_FRAMES</span><span class="p">);</span>
+<span class="n">string</span> <span class="n">frameNumberString</span> <span class="o">=</span> <span class="n">ss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+<span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">frameNumberString</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+        <span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span> <span class="mf">0.5</span> <span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">));</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">We are ready to show the current input frame and the results.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">//show the current frame and the fg masks</span>
+<span class="n">imshow</span><span class="p">(</span><span class="s">"Frame"</span><span class="p">,</span> <span class="n">frame</span><span class="p">);</span>
+<span class="n">imshow</span><span class="p">(</span><span class="s">"FG Mask MOG"</span><span class="p">,</span> <span class="n">fgMaskMOG</span><span class="p">);</span>
+<span class="n">imshow</span><span class="p">(</span><span class="s">"FG Mask MOG 2"</span><span class="p">,</span> <span class="n">fgMaskMOG2</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The same operations listed above can be performed using a sequence of images as input. The processImage function is called and, instead of using a <a class="reference external" href="http://docs.opencv.org/modules/videoio/doc/reading_and_writing_video.html?highlight=videocapture#videocapture">VideoCapture</a> object, the images are read by using <a class="reference external" href="http://docs.opencv.org/modules/imgcodecs/doc/reading_and_writing_images.html?highlight=imread#imread">imread</a>, after individuating the correct path for the next frame to read.</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="c1">//read the first file of the sequence</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">fistFrameFilename</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">frame</span><span class="p">.</span><span class="n">data</span><span class="p">){</span>
+  <span class="c1">//error in opening the first image</span>
+  <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Unable to open first image frame: "</span> <span class="o">&lt;&lt;</span> <span class="n">fistFrameFilename</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">...</span>
+<span class="c1">//search for the next image in the sequence</span>
+<span class="n">ostringstream</span> <span class="n">oss</span><span class="p">;</span>
+<span class="n">oss</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">frameNumber</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">string</span> <span class="n">nextFrameNumberString</span> <span class="o">=</span> <span class="n">oss</span><span class="p">.</span><span class="n">str</span><span class="p">();</span>
+<span class="n">string</span> <span class="n">nextFrameFilename</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">nextFrameNumberString</span> <span class="o">+</span> <span class="n">suffix</span><span class="p">;</span>
+<span class="c1">//read the next frame</span>
+<span class="n">frame</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">nextFrameFilename</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">frame</span><span class="p">.</span><span class="n">data</span><span class="p">){</span>
+  <span class="c1">//error in opening the next image in the sequence</span>
+  <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Unable to open image frame: "</span> <span class="o">&lt;&lt;</span> <span class="n">nextFrameFilename</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//update the path of the current frame</span>
+<span class="n">fn</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">nextFrameFilename</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note that this example works only on image sequences in which the filename format is &lt;n&gt;.png, where n is the frame number (e.g., 7.png).</p>
+</li>
+</ol>
+</div>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#results" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Given the following input parameters:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="o">-</span><span class="n">vid</span> <span class="n">Video_001</span><span class="p">.</span><span class="n">avi</span>
+</pre></div>
+</div>
+<p>The output of the program will look as the following:</p>
+<img alt="Background Subtraction - Video File" class="align-center" src="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/Background_Subtraction_Tutorial_Result_1.png">
+</li>
+<li><p class="first">The video file Video_001.avi is part of the <a class="reference external" href="http://bmc.univ-bpclermont.fr/">Background Models Challenge (BMC)</a> data set and it can be downloaded from the following link <a class="reference external" href="http://bmc.univ-bpclermont.fr/sites/default/files/videos/evaluation/Video_001.zip">Video_001</a> (about 32 MB).</p>
+</li>
+<li><p class="first">If you want to process a sequence of images, then the ‘-img’ option has to be chosen:</p>
+<div class="highlight-cpp"><div class="highlight"><pre><span class="o">-</span><span class="n">img</span> <span class="mi">111</span><span class="n">_png</span><span class="o">/</span><span class="n">input</span><span class="o">/</span><span class="mf">1.</span><span class="n">png</span>
+</pre></div>
+</div>
+<p>The output of the program will look as the following:</p>
+<img alt="Background Subtraction - Image Sequence" class="align-center" src="./How to Use Background Subtraction Methods — OpenCV 3.0.0-dev documentation_files/Background_Subtraction_Tutorial_Result_2.png">
+</li>
+<li><p class="first">The sequence of images used in this example is part of the <a class="reference external" href="http://bmc.univ-bpclermont.fr/">Background Models Challenge (BMC)</a> dataset and it can be downloaded from the following link <a class="reference external" href="http://bmc.univ-bpclermont.fr/sites/default/files/videos/learning/111_png.zip">sequence 111</a> (about 708 MB). Please, note that this example works only on sequences in which the filename format is &lt;n&gt;.png, where n is the frame number (e.g., 7.png).</p>
+</li>
+</ul>
+</div>
+<div class="section" id="evaluation">
+<h2>Evaluation<a class="headerlink" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#evaluation" title="Permalink to this headline">¶</a></h2>
+<p>To quantitatively evaluate the results obtained, we need to:</p>
+<ul class="simple">
+<li>Save the output images;</li>
+<li>Have the ground truth images for the chosen sequence.</li>
+</ul>
+<p>In order to save the output images, we can use <a class="reference external" href="http://docs.opencv.org/modules/imgcodecs/doc/reading_and_writing_images.html?highlight=imwrite#imwrite">imwrite</a>. Adding the following code allows for saving the foreground masks.</p>
+<blockquote>
+<div><div class="highlight-cpp"><div class="highlight"><pre><span class="n">string</span> <span class="n">imageToSave</span> <span class="o">=</span> <span class="s">"output_MOG_"</span> <span class="o">+</span> <span class="n">frameNumberString</span> <span class="o">+</span> <span class="s">".png"</span><span class="p">;</span>
+<span class="kt">bool</span> <span class="n">saved</span> <span class="o">=</span> <span class="n">imwrite</span><span class="p">(</span><span class="n">imageToSave</span><span class="p">,</span> <span class="n">fgMaskMOG</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">saved</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="s">"Unable to save "</span> <span class="o">&lt;&lt;</span> <span class="n">imageToSave</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Once we have collected the result images, we can compare them with the ground truth data. There exist several publicly available sequences for background subtraction that come with ground truth data. If you decide to use the <a class="reference external" href="http://bmc.univ-bpclermont.fr/">Background Models Challenge (BMC)</a>, then the result images can be used as input for the <a class="reference external" href="http://bmc.univ-bpclermont.fr/?q=node/7">BMC Wizard</a>. The wizard can compute different measures about the accuracy of the results.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/background_subtraction/background_subtraction.html#references" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Background Models Challenge (BMC) website, <a class="reference external" href="http://bmc.univ-bpclermont.fr/">http://bmc.univ-bpclermont.fr/</a></li>
+<li>Antoine Vacavant, Thierry Chateau, Alexis Wilhelm and Laurent Lequievre. A Benchmark Dataset for Foreground/Background Extraction. In ACCV 2012, Workshop: Background Models Challenge, LNCS 7728, 291-300. November 2012, Daejeon, Korea.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <div class="feedback">
+              <h2>Help and Feedback</h2>
+              You did not find what you were looking for?
+              <ul>
+                  
+                  
+                  
+                  <li>Ask a question on the <a href="http://answers.opencv.org/">Q&amp;A forum</a>.</li>
+                  <li>If you think something is missing or wrong in the documentation,
+                  please file a <a href="http://code.opencv.org/">bug report</a>.</li>
+              </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="http://docs.opencv.org/3.0-beta/genindex.html" title="General Index">index</a></li>
+        <li class="right">
+          <a href="http://docs.opencv.org/3.0-beta/doc/tutorials/objdetect/table_of_content_objdetect/table_of_content_objdetect.html" title="objdetect module. Object Detection">next</a> |</li>
+        <li class="right">
+          <a href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/table_of_content_video/table_of_content_video.html" title="video module. Video analysis">previous</a> |</li>
+        <li><a href="http://docs.opencv.org/3.0-beta/index.html">OpenCV 3.0.0-dev documentation</a> »</li>
+          <li><a href="http://docs.opencv.org/3.0-beta/doc/tutorials/tutorials.html">OpenCV Tutorials</a> »</li>
+          <li><a href="http://docs.opencv.org/3.0-beta/doc/tutorials/video/table_of_content_video/table_of_content_video.html"><em>video</em> module. Video analysis</a> »</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        © Copyright 2011-2014, opencv dev team.
+      Last updated on Nov 10, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+      <a href="http://docs.opencv.org/3.0-beta/_sources/doc/tutorials/video/background_subtraction/background_subtraction.txt" rel="nofollow">Show this page source.</a>
+    </div>
+  
+</body></html>
