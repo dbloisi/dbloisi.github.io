@@ -194,6 +194,7 @@
 }
 .fa-envelope-o:before {
   content: "\f003";
+  color: #ffffff;
 }
 .fa-heart:before {
   content: "\f004";
