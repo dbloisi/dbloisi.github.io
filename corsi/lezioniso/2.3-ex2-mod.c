@@ -47,16 +47,16 @@ int main(int argc, char** argv) {
     exit(1);
   }
   if(pid == 0) {
-    printf("eseguo name = name_1 (pid: %d)\n", pid);
+    printf("eseguo name = name_1 (pid: %d)\n", getpid());
     name = name_1;
-    printf("invoco fn1() (pid: %d)\n", pid);
+    printf("invoco fn1() (pid: %d)\n", getpid());
     fn1();
   }
   else {
-    printf("invoco fn0() (pid: %d)\n", pid);
+    printf("invoco fn0() (pid: %d)\n", getpid());
     fn0();
   }
-  printf("arrivederci da pid: %d\n", pid);
+  printf("arrivederci da pid: %d\n", getpid());
   exit(0);
 }
 
