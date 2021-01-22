@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>How to Use OpenCV for Ball Detection</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About me - Domenico D. Bloisi">
+    <meta name="author" content="Domenico Bloisi adapted a 3rd Wave Media template">    
+    <link rel="shortcut icon" href="../favicon.ico">  
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> 
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.css">
+        
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="../assets/css/styles.css">
+    
+	<script>
+        var myVar;
+
+        function myFunction() {
+            myVar = setTimeout(showPage, 2000);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "block";
+        }
+    </script>
+    
+</head> 
+
+<body onload="myFunction()" style="margin:0;">
+
+    <div id="loader">
+        <span> <img src="../assets/images/dbloisi.png" alt="Domenico D. Bloisi" /></span>
+    </div>
+
+    <div style="display:none;" id="myDiv" class="animate-bottom">
+	
+    <!-- ******HEADER****** --> 
+    <header class="header">
+        <div class="container">                       
+            <img class="profile-image img-responsive pull-left" src="../assets/images/dbloisi.png" alt="Domenico D. Bloisi"
+			hegiht=100 width=100/>
+            <div class="profile-content pull-left">
+                <h1 class="name">About me</h1>
+                <h2 class="desc">Domenico D. Bloisi</h2>
+           </div>
+               
+        </div><!--//container-->
+    </header><!--//header-->
+    
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+			
+			    <section class="about section">
+                    <div class="section-inner">
+                        
+                        <h2 class="heading">Education</h2>
+                        <div class="content" style="text-align:left;">
+                                      
+                                <h3 class="title"><i class="fa fa-graduation-cap"></i>  PhD  Engineering in Computer Science</h3>
+                                <h4 class="university">Sapienza University of Rome <span class="year">(2006-2010)</span></h4>
+								<p>February the 3rd, 2010<br>
+									<a href="http://www.dis.uniroma1.it/">Dept. of Computer, Control,
+									and Management Engineering</a>, <a href="http://www.uniroma1.it/">Sapienza
+									University of Rome</a> (Italy)<br>
+									Thesis: <a href="http://www.dis.uniroma1.it/~bloisi/phdThesis/bloisi_phd_thesis.pdf">"Visual
+									Tracking and Data Fusion for Automatic Video Surveillance"</a><br>
+									Advisor: Prof. <a href="http://www.dis.uniroma1.it/~iocchi">Luca
+									Iocchi</a>
+								</p>
+							
+
+                                                 
+                                <h3 class="title"><i class="fa fa-graduation-cap"></i>  MSc  Engineering in Computer Science</h3>
+                                <h4 class="university">Sapienza University of Rome <span class="year">(2004-2006)</span></h4>
+                                <p>
+								    May the 26th, 2006<br>
+									Faculty of Engineering, <a href="http://www.uniroma1.it/">Sapienza
+									University of Rome</a> (Italy)<br>
+									Thesis: <a href="http://www.dis.uniroma1.it/~bloisi/mastersThesis/SteganografiaECrittografia.pdf">"Steganografia
+									e crittografia tramite stereo visione"</a> (in Italian)<br>
+									Awarded as the best Computer Engineering thesis presented during
+									the Academic Year 2004-2005 at Sapienza University of Rome<br>
+									Published on <a href="http://www.pubblitesi.it/">www.pubblitesi.it</a> which
+									collects the best thesis presented in Italy<br>
+									Advisor: Prof. <a href="http://www.dis.uniroma1.it/~iocchi">Luca
+									Iocchi</a>
+								</p>
+                            
+                                <h3 class="title"><i class="fa fa-graduation-cap"></i>  BSc  Engineering in Computer Science</h3>
+                                <h4 class="university">Sapienza University of Rome <span class="year">(2000-2004)</span></span></h4>
+                                <p>
+								    February the 19th, 2004<br>
+									Faculty of Engineering, <a href="http://www.uniroma1.it/">Sapienza
+									University of Rome</a> (Italy)<br>
+									Thesis: <a href="http://www.dis.uniroma1.it/~bloisi/bachelorsThesis/TecnicheDiCorrelazione.pdf">"Tecniche
+									di correlazione per la stereo visione"</a> (in Italian)<br>
+									Advisor: Prof. <a href="http://www.dis.uniroma1.it/~iocchi">Luca
+									Iocchi</a>
+								</p>
+                        </div><!--//content-->
+                    
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+			
+			    <section class="about section">
+                    <div class="section-inner">
+                        
+                        <h2 class="heading">Professional Experience</h2>
+                        <div class="content" style="text-align:left;">
+			
+			                <p class="Stile3">December 2019 - today<br>
+							<b>Tenure track assistant professor (RTD B)</b> with the Department
+								of Mathematics, Computer Science, and Economics - University of Basilicata (Italy)
+							</p>
+<p class="Stile3">February 2017 - November 2018<br>
+<b>Fixed term assistant professor (RTD A)</b> with the <a href="http://www.di.univr.it/">Department of Computer Science</a>, <a href="http://www.univr.it/">University of Verona</a> (Italy)
+</p>
+
+<p class="Stile3">
+<b>Team Leader</b> of the <a href="http://spqr.diag.uniroma1.it/">SPQR Robot Soccer Team</a>.
+</p>
+
+<p class="Stile3">January 2016 - December 2016<br>
+<b>Research associate</b> (assegnista di ricerca) with the <a href="http://www.dis.uniroma1.it/">Department of Computer, Control,
+and Management Engineering</a>, <a href="http://www.uniroma1.it/">Sapienza
+University of Rome</a>, Italy.
+<br>
+
+<p class="Stile3">November 2012 - October 2015<br>
+<b>Fixed term (3 years) assistant professor (RTD A)</b> with the <a href="http://www.dis.uniroma1.it/">Department of Computer, Control,
+and Management Engineering</a>, <a href="http://www.uniroma1.it/">Sapienza
+University of Rome</a>, Italy.
+</p>
+
+<p class="Stile3">September 2013 - October 2013<br>
+<b>Visiting professor</b> at <a href="https://www.grasp.upenn.edu/">GRASP Lab</a>, University of Pennsylvania, Philadelphia, USA.
+</p>
+
+<p class="Stile3">April 2010 - October 2012<br>
+<b>Post-doc</b> (borsista) with the <a href="http://www.dis.uniroma1.it/">Department of Computer, Control,
+and Management Engineering</a>, <a href="http://www.uniroma1.it/">Sapienza
+University of Rome</a>, Italy.<br>
+<b>INIZIATIVA SOFTWARE 2 project.</b> Design and implementation of an automatic maritime
+surveillance system for port security. <br>
+<b>VIVA project.</b> Design and implementation of a virtual advertisement system for zooming cameras.
+</p>
+
+<p class="Stile3">April 2009 - March 2010<br>
+<b>Research associate</b> (assegnista di ricerca) with the
+<a href="http://vips.sci.univr.it/">VIPS lab</a>,
+<a href="http://www.univr.it/">University of Verona</a>, Italy.<br>
+<b>SAMURAI FP7 project</b> (Suspicious and Abnormal behaviour Monitoring Using a
+netwoRk of cAmeras for sItuation awareness enhancement). Develop and integrate an
+innovative intelligent surveillance system for monitoring people and vehicle activities
+at both inside and surrounding areas of a critical public infrastructure.
+</p>
+
+<p class="Stile3">February 2008 - September 2008<br>
+<b>Visiting scholar</b> at <a href="http://dircweb.king.ac.uk/dirc/">Digital Imaging
+Research Centre (DIRC)</a>, <a href="http://cism.kingston.ac.uk/">Faculty of
+Computing, Information Systems and Mathematics (CISM)</a>, Kingston University,
+London, UK.<br>
+Supervisor: Prof. <a href="http://cism.kingston.ac.uk/people/details.php?AuthorID=46">Paolo
+Remagnino</a>. </p>
+
+<p class="Stile3">October 2006 - February 2010<br>
+<b>PhD student</b> in Computer Engineering, <a href="http://www.dis.uniroma1.it/">Department of Computer, Control,
+and Management Engineering</a>, <a href="http://www.uniroma1.it/">Sapienza
+University of Rome</a>, Italy.</p>
+
+<p class="Stile3">June 2006 - May 2008<br>
+<a href="http://www.dis.uniroma1.it/~iocchi/ARGOS/index.html">ARGOS project</a>.
+(Automatic Remote Grand canal Observation System). Monitor
+the naval traffic in the Gran Canal in Venice using cameras only.<br>
+See <a href="http://www.dis.uniroma1.it/~bloisi/video/Argos_TG1_13.30.wmv">RAI-Tg1</a>, <a href="http://www.dis.uniroma1.it/~bloisi/segmentation/larepubblica.pdf">La
+Repubblica</a>, <a href="http://neapolis.blog.rai.it/2008/11/25/vista-sul-canal-grande-nea-polis-25112008/">RAI-Tgr
+Neapolis</a>.</p>
+
+
+							
+
+						</div><!--//content-->
+                    
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->                          
+              
+            </div><!--//secondary-->    
+        </div><!--//row-->
+    
+		<!-- ******FOOTER****** --> 
+		<footer class="footer">
+			<div class="container text-center">
+                <small class="copyright">This template adapted from <a href="http://themes.3rdwavemedia.com" target="_blank">3rd Wave Media</a></small>
+			</div><!--//container-->
+		</footer><!--//footer-->
+	
+	</div><!--//masonry-->
+    
+     
+</body>
+</html> 
+
