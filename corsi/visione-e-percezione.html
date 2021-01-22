@@ -20,15 +20,31 @@
         
     <!-- Theme CSS -->  
     <link id="theme-style" rel="stylesheet" href="../assets/css/styles.css">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
+	<script>
+        var myVar;
+
+        function myFunction() {
+            myVar = setTimeout(showPage, 2000);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "block";
+        }
+    </script>
+    
+</head>
     
 </head> 
 
-<body>
+<body onload="myFunction()" style="margin:0;">
+
+    <div id="loader">
+        <span> <img src="../assets/images/dbloisi.png" alt="Domenico D. Bloisi" /></span>
+    </div>
+
+    <div style="display:none;" id="myDiv" class="animate-bottom">
     <!-- ******HEADER****** --> 
     <header class="header">
         <div class="container">    
@@ -1400,9 +1416,14 @@
 								<a href="https://dbloisi.github.io/" target="_blank">Domenico Bloisi's home page</a>
 							</div>
 							<div class="item">
-								<a href="http://spqr.diag.uniroma1.it/" target="_blank">SPQR Robot Soccer Team</a>
-								<img class="img-responsive project-image"
-                                     src="../assets/images/logo-icon-spqr-spl.png" alt="logo spqr spl" />
+								<a href="https://sites.google.com/unibas.it/wolves" target="_blank">UNIBAS WOLVES Robot Soccer Team</a>
+										<center>
+										<img 
+											class="img-responsive project-image"
+											src="../assets/images/unibas_wolves_logo.jpg" alt="logo unibas wolves spl"
+											width="40%" height="40%"
+										/>
+								        </center>
 							</div>
 
 							<div class="item">
