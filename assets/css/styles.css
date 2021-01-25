@@ -546,8 +546,8 @@ iframe {
 	width: 150px;
 	height: 150px;
 	margin: -75px 0 0 -75px;  
-	-webkit-animation: spin 2s linear infinite;
-	animation: spin 2s linear infinite;
+	-webkit-animation: spin 1000ms linear infinite;
+	animation: spin 1000ms linear infinite;
 }
 
 @-webkit-keyframes spin {
@@ -563,9 +563,9 @@ iframe {
 .animate-bottom {
 	position: relative;
 	-webkit-animation-name: animatebottom;
-	-webkit-animation-duration: 1s;
+	-webkit-animation-duration: 1000ms;
 	animation-name: animatebottom;
-	animation-duration: 1s
+	animation-duration: 1000ms;
 }
 
 @-webkit-keyframes animatebottom {
