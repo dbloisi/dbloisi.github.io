@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Visione e Percezione</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Visione e Percezione">
+    <meta name="author" content="Domenico Bloisi adapted a 3rd Wave Media template">    
+    <link rel="shortcut icon" href="../favicon.ico">  
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> 
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.css">
+        
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="../assets/css/styles.css">
+    
+	<script>
+        var myVar;
+
+        function myFunction() {
+            myVar = setTimeout(showPage, 1000);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "block";
+        }
+    </script>
+    
+</head>
+    
+</head> 
+
+<body onload="myFunction()" style="margin:0;">
+
+    <div id="loader">
+        <span> <img src="../assets/images/dbloisi.png" alt="Domenico D. Bloisi" /></span>
+    </div>
+
+    <div style="display:none;" id="myDiv" class="animate-bottom">
+    <!-- ******HEADER****** --> 
+    <header class="header">
+        <div class="container">    
+			<div class="profile-content pull-left">
+				<h4 class="name">Visione e Percezione</h4>
+                <h4 class="desc">A.A. 2019/2020</h4>
+				<h4 class="desc">Docente: <a href="http://web.unibas.it/bloisi/">Domenico Daniele Bloisi</a></h4>
+			</div>			
+			<div class="profile-content pull-right">
+				<img class="profile-image img-responsive pull-left"
+				    src="../assets/images/logo.png"
+					alt="unibas logo"
+					height=97 width=312/>
+			</div>
+        </div><!--//container-->
+    </header><!--//header-->
+    
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+			
+				<section class="about section">
+                    <div class="section-inner">                      
+            		
+					<div class="content">
+               
+					<a href="#info">Informazioni</a> &nbsp;&nbsp;
+					<a href="#avvisi"><font color="blue">Avvisi</font></a> &nbsp;&nbsp;
+					<a href="#programma">Programma</a> &nbsp;&nbsp;
+					<a href="#materiale"><font color="blue">Materiale</font></a> &nbsp;&nbsp;
+					<a href="#diario">Diario</a> &nbsp;&nbsp;
+					<a href="#progetti"><font color="blue">Progetti</font></a> &nbsp;&nbsp;
+					<a href="#link">Link utili</a>
+					
+					
+					</div><!--//content-->
+					</div><!--//section-inner-->                 
+                </section><!--//section-->
+			
+			    		
+			
+			    <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="info"></a>Informazioni sul corso<br>
+						Visione e Percezione</h2>
+                        <div class="content" style="text-align:left;">
+                            <p>Un aspetto chiave del modello
+							<a href="https://www.mise.gov.it/index.php/it/industria40">industria 4.0</a>
+							riguarda l'impiego
+							di sistemi ciberfisici nella produzione e gestione di beni e
+							servizi. Un sistema ciberfisico &egrave; un sistema informatico
+							in grado di interagire con il mondo fisico
+							in cui esso opera e di collaborare con altri sistemi ciberfisici.
+							</p>
+							
+							<p>Gli argomenti trattati nel corso riguardano la programmazione di
+							moduli di visione per sistemi ciberfisici complessi quali i sistemi robotici e includono
+							tematiche legate alla percezione di agenti intelligenti.
+							</p>
+							
+							<p><b>Obiettivi:</b></p>
+							<p>Il corso intende fornire agli studenti conoscenze
+							relative alla programmazione in Python per lo sviluppo di
+							moduli di visione basati principalmente sul sistema operativo ROS e
+							sulla libreria OpenCV.
+							</p>
+							
+							<p><b>Periodo:</b></p>
+							<p>II semestre (marzo 2020 – giugno 2020)</p>
+							
+							<p><b>Orario di Lezione:</b></p>
+							<p>marted&igrave; dalle 17:00 alle 19:00<br>
+							mercoled&igrave; dalle 8:30 alle 10:30<br>
+							presso AULA GUGLIELMINI</p>
+														
+							<p><b>Esame:</b></p>
+							<p>Il voto finale viene conseguito svolgendo individualmente
+							o in gruppo un progetto finale che comprenda le tematiche di studio
+							affrontate durante il corso.<br>
+							Le tematiche del progetto dovranno essere concordate con il docente.</p>
+							
+							<p>La descrizione del lavoro progettuale dovr&agrave;
+							rispettare il template disponibile
+							<a href="lezionivep1920/template-progetto-VeP.zip">qui</a></p>
+							
+							<p>Esempi di progetti <a href="#progetti">qui</a></p>
+							
+							<p><b>Ricevimento:</b></p>
+							<ul>
+							<!--
+								<li>Durante il periodo delle lezioni:<br>
+								Mercoled&igrave dalle 11:00 alle 13:00<br>
+								Edificio 3D, II piano, stanza 15<br>
+								Si invitano gli studenti a controllare regolarmente
+								la <a href="#avvisi">bacheca degli avvisi</a> per eventuali variazioni</p>
+								</li>
+							-->
+								<li>
+								<!--Al di fuori del periodo delle lezioni:<br>-->
+								da concordare con il docente tramite email
+								</li>
+							</ul>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+			
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="programma"></a>Programma preliminare<br>
+						Visione e Percezione</h2>
+                        <div class="content" style="text-align:left;">
+						
+						<ul>
+						    <li>Introduzione al linguaggio Python</li>
+							
+							<li>Elaborazione delle immagini con Python</li>
+							
+							<li>Percezione 2D - OpenCV</li>
+							
+							<li>Introduzione al Deep Learning</li>
+							
+							<li>Introduzione a ROS</li>
+														
+							<li>Il paradigma publisher and subscriber</li>
+							
+							<li>Simulatori</li>
+							
+							<li>Percezione 3D - PCL</li>							
+
+						</ul>
+							<p>Per il programma completo fare riferimento al
+							<a href="#diario">diario delle lezioni</a>							
+						
+												
+                                                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+			
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="materiale"></a>Materiale Didattico</h2>
+                        <div class="content" style="text-align:left;">
+						
+						    <p><b>Tutorial di ROS:</b></p>
+							<ul>
+							<li><a href="http://wiki.ros.org/ROS/Tutorials">in inglese</a></li>
+							<li><a href="http://wiki.ros.org/it/ROS/Tutorials">in italiano</a></li>
+							</ul>
+							</p>
+												
+						    <p><b>Libro di testo:</b>
+							</p>
+							Il corso non prevede un libro di testo. Gli studenti
+							che vogliano approfondire i concetti trattati a lezione
+							possono	utilizzare i seguenti testi:
+							<ul>
+							<li>Jan Erik Solem "Programming Computer Vision with Python" O'Reilly Media</li>
+							<li>Francois Chollet "Deep Learning with Python" Manning Publications Co.</li>
+							<li>libri su ROS (elenco disponibile
+							<a href="http://wiki.ros.org/Books">qui</a>)
+							</ul>
+							</p>
+							
+							<p><b>Slide:</b>
+							<ul>
+								<li>
+									disponibili nella colonna download del <a href="#diario">diario delle lezioni</a>							
+								</li>
+							</ul>
+							</p>
+							
+							
+							
+                                                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+								
+							
+								
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="diario"></a>Diario delle Lezioni</h2>
+                        <div class="content" style="text-align:left;">
+						    
+							<div style="overflow-x:auto;">
+							<table border="2">
+								<tbody>
+									<tr>
+										<td	style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif;background-color:#efefef" width="20%">
+											<strong>Data</strong>
+										</td>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif;background-color:#efefef" width="45%">
+											<strong>Argomenti trattati</strong>
+										</td>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif;background-color:#efefef" width="35%">
+											<strong>Download</strong>
+										</td>
+									</tr>
+    
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>03/03/2020
+											</p>
+
+											<p>Lezione 1</p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											<p>&nbsp; Lezione di presentazione</p>
+											<p>&nbsp;&nbsp;  &#x2022; Robot mobili</p>
+											<p>&nbsp;&nbsp;  &#x2022; See-think-act cycle</p>
+											<p>&nbsp; Uber's accident</p>
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/1.1-introduzione.pdf">1.1-introduzione</a> 
+											</p>
+
+											<p>
+											<a href="lezionivep1920/uber-accident.pdf">uber-accident</a>
+											</p>											
+											
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>04/03/2020
+											</p>
+
+											<p>Lezione 2</p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp; Python intro</p>
+											<p>&nbsp;&nbsp;  &#x2022; variabili</p>
+											<p>&nbsp;&nbsp;  &#x2022; input()</p>
+											<p>&nbsp;&nbsp;  &#x2022; print()</p>
+											<p>&nbsp;&nbsp;  &#x2022; espressioni booleane</p>
+											<p>&nbsp;&nbsp;  &#x2022; istruzioni condizionali</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/1.2-python-intro.pdf">1.2-python-intro</a>
+											</p>
+											
+											<p>
+											<a href="lezionivep1920/esercizi-python-parte-1.pdf">esercizi-python-parte-1</a>
+											</p>					
+											
+										    
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>10/03/2020
+											</p>
+
+											<p>Lezione 3</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+									
+											<p>&nbsp;  Python intro</p>
+											<p>&nbsp;  &#x2022; funzioni</p>
+											<p>&nbsp;  &#x2022; while</p>
+											<p>&nbsp;  &#x2022; variabili locali</p>
+											<p>&nbsp;  &#x2022; variabili globali</p>
+											
+										</td>
+																			
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/1.3-funzioni-python.pdf">1.3-funzioni-python</a>
+											</p>
+											<p>
+											<a href="lezionivep1920/esercizi-python-parte-2.pdf">esercizi-python-parte-2</a>
+											</p>
+											
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>11/03/2020
+											</p>
+
+											<p>Lezione 4</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp;  Python intro</p>
+											<p>&nbsp;  &#x2022; liste</p>
+											<p>&nbsp;  &#x2022; sequenze</p>
+											<p>&nbsp;  &#x2022; ciclo for</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/1.4-liste-python.pdf">1.4-liste-python</a>
+											</p>
+											
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>17/03/2020
+											</p>
+
+											<p>Lezione 5</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp;  Python intro</p>
+											<p>&nbsp;  &#x2022; dizionari</p>
+											<p>&nbsp;  &#x2022; insiemi</p>
+											<p>&nbsp;  &#x2022; file</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/1.5-dizionari-e-file-python.pdf">1.5-dizionari-e-file-python</a>
+											</p>
+											
+											<p>
+											<a href="lezionivep1920/esercizi-python-parte-3.pdf">esercizi-python-parte-3</a>
+											</p>
+											
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>18/03/2020
+											</p>
+
+											<p>Lezione 6</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+																					
+											<p>&nbsp; Percezione e visione</p>
+											<p>&nbsp;  &#x2022; immagini</p>
+											<p>&nbsp;  &#x2022; classificazione</p>
+											<p>&nbsp;  &#x2022; detection</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+																				
+											<p><a href="lezionivep1920/2.1-percezione-visione.pdf">
+											2.1-percezione-visione</a>
+											</p>
+																														
+										</td>
+									</tr>
+									
+									
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>24/03/2020
+											</p>
+
+											<p>Lezione 7</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp;  Processamento delle immagini</p>
+											<p>&nbsp;  &#x2022; NumPy</p>
+											<p>&nbsp;  &#x2022; Matplotlib</p>
+											<p>&nbsp;  &#x2022; Pillow</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/2.2-processamento-immagini.pdf">2.2-processamento-immagini</a>
+											</p>
+											
+											<p>
+											<a href="images/nao-v6-spqr.jpg">nao-v6-spqr.jpg</a>
+											</p>
+																				    
+										</td>
+									</tr>
+									
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>25/03/2020
+											</p>
+
+											<p>Lezione 8</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp;  Filtri</p>
+											<p>&nbsp;  &#x2022; Linear filtering</p>
+											<p>&nbsp;  &#x2022; Convoluzione</p>
+											<p>&nbsp;  &#x2022; Gradiente</p>
+										
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">							
+										    
+											<p>
+											<a href="lezionivep1920/2.3-filtri.pdf">2.3-filtri</a>
+											</p>
+											
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>31/03/2020
+											</p>
+
+											<p>Lezione 9</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp;  Esercitazione 1</p>
+											<p>&nbsp;  &#x2022; Load/save images</p>
+											<p>&nbsp;  &#x2022; Conversione in grayscale</p>
+											<p>&nbsp;  &#x2022; Cropping</p>
+											<p>&nbsp;  &#x2022; Resize</p>
+											<p>&nbsp;  &#x2022; Testo su immagini</p>
+										    
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/esercizi-1.pdf">esercizi-1</a>
+											</p>
+											
+											<p>
+											<a href="images/forme.png">forme.png</a>
+											</p>
+																			    
+										</td>
+									</tr>
+									
+									
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>01/04/2020
+											</p>
+
+											<p>Lezione 10</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp;  Local Image Descriptors</p>
+											<p>&nbsp;  &#x2022; Panoramas</p>
+											<p>&nbsp;  &#x2022; Harris corner detector</p>
+											<p>&nbsp;  &#x2022; Scale invariant detection</p>
+										
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/2.4-features.pdf">2.4-features</a>
+											</p>
+											
+											<p>
+											<a href="images/chessboard-1.jpg">chessboard-1.jpg</a>
+											</p>
+											
+											<p>
+											<a href="images/chessboard-2.jpg">chessboard-2.jpg</a>
+											</p>
+											
+											<p>
+											<a href="images/chessboard-3.jpg">chessboard-3.jpg</a>
+											</p>
+											
+											<p>
+											<a href="images/chessboard-4.jpg">chessboard-4.jpg</a>
+											</p>
+										
+										    
+										</td>
+									</tr>
+									
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>07/04/2020
+											</p>
+
+											<p>Lezione 11</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp;  Libreria OpenCV</p>
+											
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/3.1-opencv.pdf">3.1-opencv</a>
+											</p>
+											
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>08/04/2020
+											</p>
+
+											<p>Lezione 12</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											<p>&nbsp;  Feature Descriptors</p>
+											<p>&nbsp;&nbsp;  &#x2022; Multiscale Oriented PatcheS</p>
+											<p>&nbsp;&nbsp;  &#x2022; SIFT</p>
+											<p>&nbsp;&nbsp;  &#x2022; SURF</p>
+											
+											
+											<!--
+											<p>&nbsp; ROS intro</p>
+											<p>&nbsp;&nbsp;  &#x2022; nodi</p>
+											<p>&nbsp;&nbsp;  &#x2022; topic e messaggi</p>
+											<p>&nbsp;&nbsp;  &#x2022; installazione di ROS</p>
+											<p>&nbsp;&nbsp;  &#x2022; turtlesim</p>
+											-->
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											<p>
+											<a href="lezionivep1920/3.2-feature-descriptors.pdf">3.2-feature-descriptors</a>
+											</p>
+											<p>
+											<a href="images/castelmezzano-panorama.jpg">castelmezzano-panorama.jpg</a>
+											</p>											
+											
+											
+										
+										    <!--
+											
+											<p>
+											<a href="lezionisi/4.1-ros-intro.pdf">4.1-ros-intro.pdf</a>
+											</p>
+										    <p><a href="http://releases.ubuntu.com/16.04/" target="_blank">Ubuntu 16.04</a></p>
+											<p><a href="http://wiki.ros.org/kinetic" target="_blank">ROS Kinetic Kame</a></p>
+											-->
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>14/04/2020
+											</p>
+
+											<p>Lezione 13</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp; Feature Matching</p>											
+											<p>&nbsp;&nbsp;  &#x2022; brute force matching</p>
+											<p>&nbsp;&nbsp;  &#x2022; ROC curve</p>
+																					
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+											<a href="lezionivep1920/3.3-feature-matching.pdf">3.3-feature-matching</a>
+											</p>
+											<p>
+											<a href="images/montagna-1.jpg">montagna-1.jpg</a> (extracted from
+											<a href="http://matthewalunbrown.com/papers/iccv2003.ppt">here</a>)
+											</p>
+											<p>
+											<a href="images/montagna-2.jpg">montagna-2.jpg</a> (extracted from
+											<a href="http://matthewalunbrown.com/papers/iccv2003.ppt">here</a>)
+											</p>											
+											
+										
+										    <p>
+											<a href="lezionivep1920/sift.ipynb">sift.ipynb</a>
+											</p>
+											
+											<p>
+											<a href="lezionivep1920/orb.ipynb">orb.ipynb</a>
+											</p>
+											
+											<p>
+											<a href="lezionivep1920/ransac.ipynb">ransac.ipynb</a>
+											</p>
+											
+										</td>
+									</tr>
+									
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>15/04/2020
+											</p>
+
+											<p>Lezione 14</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+									
+											<p>&nbsp;  Traformazioni e omografie</p>
+											<p>&nbsp;  &#x2022; warping</p>
+											<p>&nbsp;  &#x2022; interpolazione</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											
+											<p>
+											<a href="lezionivep1920/3.4-omografie.pdf">3.4-omografie</a>
+											</p>
+											
+											<p>
+											<a href="lezionivep1920/panorama.ipynb">panorama.ipynb</a>
+											</p>
+											
+											<p>
+											<a href="lezionivep1920/stitching.ipynb">stitching.ipynb</a>
+											</p>
+										
+										    
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>21/04/2020
+											</p>
+
+											<p>Lezione 15</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp; ROS intro</p>
+											<p>&nbsp;&nbsp;  &#x2022; nodi</p>
+											<p>&nbsp;&nbsp;  &#x2022; topic e messaggi</p>
+											<p>&nbsp;&nbsp;  &#x2022; installazione di ROS</p>
+											<p>&nbsp;&nbsp;  &#x2022; turtlesim</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											
+											<p>
+											<a href="lezionivep1920/4.1-ros-intro.pdf">4.1-ros-intro</a>
+											</p>
+											
+										    <p><a href="http://releases.ubuntu.com/18.04/" target="_blank">Ubuntu 18.04</a></p>
+											<p><a href="http://wiki.ros.org/melodic" target="_blank">ROS Melodic</a></p>
+											
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>22/04/2020
+											</p>
+
+											<p>Lezione 16</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp;  Git+ROS</p>
+											<p>&nbsp;  &#x2022; git commit</p>
+											<p>&nbsp;  &#x2022; git push</p>
+											<p>&nbsp;  &#x2022; git merge</p>
+											<p>&nbsp;  &#x2022; package hello_ros</p>
+										
+										</td>
+										
+										
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											 
+											 <p>
+											 <a href="https://www.dis.uniroma1.it/~nardi/Didattica/LabAI/matdid/GIT_SLIDES.pdf" target="_blank">
+											 GIT two words introduction</a> by Maurilio Di Cicco<br>
+											 (<a href="lezionicf/git-two-words-intro.pdf">copia locale</a>)
+											 </p>
+											 
+											 <p>
+											 <a href="lezionivep1920/4.2-git+ros.pdf">4.2-git+ros</a> 
+											 </p>
+											 
+											 <p>
+											 <a href="https://github.com/dbloisi/hello_ros" target="_blank">
+											 hello_ros</a> 
+											 </p>
+											 
+											 <p>
+											 <a href="https://github.com/dbloisi/homography-computation" target="_blank">
+											 homography-computation</a> 
+											 </p>
+											 
+											 
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>28/04/2020
+											</p>
+
+											<p>Lezione 17</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp;  Introduzione alle CNN</p>
+											<p>&nbsp;&nbsp;  &#x2022; Perceptron</p>
+											<p>&nbsp;&nbsp;  &#x2022; Hidden Layers</p>
+											<p>&nbsp;&nbsp;  &#x2022; Deep Nets</p>
+											<p>&nbsp;&nbsp;  &#x2022; CNN</p>
+											<p>&nbsp;&nbsp;  &#x2022; Tensorflow</p>
+											
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											
+											<p>
+												<a href="lezionivep1920/ccn-intro.pdf">ccn-intro</a>
+												
+												<br>
+											
+											Si ringraziano il dott. Alberto Pretto e il dott. Roberto Capobianco
+											</p>
+											
+											
+											<p>
+												<a href="https://goo.gl/mVZloU" target="_blank">TensorFlow and deep learning,
+												without a PhD by Martin Gorner</a>
+											</p>
+											
+											<p>
+											<a href="https://github.com/dbloisi/dnn_example" target="_blank">
+											dnn_example</a>
+											</p>
+											
+											
+										</td>
+									</tr>
+									
+									<tr>
+									    <td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>29/04/2020
+											</p>
+
+											<p>Lezione 18</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp; ROS+OpenCV</p>											
+											<p>&nbsp;  &#x2022; cv_bridge</p>
+											<p>&nbsp;  &#x2022; rosbag</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											
+											<p><a href="lezionivep1920/4.3-ros+opencv.pdf">
+											4.3-ros+opencv</a>
+											</p>
+											
+											<p><a href="lezionisi/2018-05-15-00-30-37.bag">
+											2018-05-15-00-30-37.bag</a>
+											</p>
+											
+											<p><a href="https://github.com/dbloisi/unibas_viewer" target="_blank">
+											unibas_viewer</a>
+											</p>
+																		
+											
+											<p><a href="https://drive.google.com/file/d/1oOMahlPdlwJkHMqXLtrLMktfx68-AGfJ/view?usp=sharing"
+											target="_blank">people.bag</a> (4 GB)											
+											<!--
+											<a href="http://www.dis.uniroma1.it/~bloisi/didattica/RobotProgramming/people.bag"
+											target="_blank"></a>
+											-->
+											
+											<p><a href="https://github.com/dbloisi/yolo_ros_detect" target="_blank">
+											yolo_ros_detect</a>
+											</p>
+											
+											<p><a href="http://profs.scienze.univr.it/~bloisi/corsi/lezionicf/office-r200.bag"
+											target="_blank">office-r200.bag</a> (921 MB)
+											
+											
+																				
+										</td>
+									</tr>
+									
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>05/05/2020
+											</p>
+
+											<p>Lezione 19</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+																						
+											<p>&nbsp; Robot mobili su ruote</p>
+											<p>&nbsp;  &#x2022; manipolatori vs robot mobili</p>
+											<p>&nbsp;  &#x2022; modello del robot mobile</p>
+											<p>&nbsp;  &#x2022; Turtlebot 3</p>
+									        <p>&nbsp;</p>
+											<p>&nbsp; ROS Launch files</p>
+											<p>&nbsp;  &#x2022; unibas_turtle</p>											
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+																	
+											
+											<p><a href="lezionivep1920/4.4-robot-mobili-su-ruote.pdf">
+											4.4-robot-mobili-su-ruote
+											</a>
+											</p>
+											
+											<p>
+											<a href="lezionivep1920/4.5-ros-launch-files.pdf">
+											4.5-ros-launch-files</a>
+											</p>
+											
+											<p>
+											<a href="https://github.com/dbloisi/unibas_turtle"
+											target="_blank">
+											unibas_turtle</a>
+											</p>
+
+											<p>
+											<a href="https://github.com/dbloisi/unibas_teleop"
+											target="_blank">
+											unibas_teleop</a>
+											</p>
+											
+																				
+										</td>
+									</tr>
+									
+									
+									<tr>
+									    <td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>06/05/2020
+											</p>
+
+											<p>Lezione 20</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp; Simulatori ROS</p>
+											<p>&nbsp;  &#x2022; Gazebo</p>
+											<p>&nbsp;  &#x2022; Turtlebot3 simulation</p>
+											<p>&nbsp;  &#x2022; Cyber lab</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											
+											<p><a href="lezionivep1920/4.6-simulatori.pdf">4.6-simulatori</a>
+											</p>
+											
+											<p><a href="http://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/"
+											target="_blank">Turtlebot3 simulation</a></p>
+																	
+										</td>
+									</tr>
+									
+									
+									<tr>
+									    <td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>12/05/2020
+											</p>
+
+											<p>Lezione 21</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											
+											<p>&nbsp; Navigazione in ROS</p>
+											<p>&nbsp;  &#x2022; Mappe</p>
+											<p>&nbsp;  &#x2022; introduzione a SLAM</p>
+											<p>&nbsp;  &#x2022; virtual SLAM and navigation</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											
+											<p><a href="lezionivep1920/5.1-navigazione.pdf">5.1-navigazione</a>
+											</p>
+											
+											<p><a href="lezionivep1920/DataFlowORB-SLAM.pdf">Data Flow ORB-SLAM</a>
+											</p>
+																						
+											
+											<p>libro <a href="www.robotis.com/service/download.php?no=719"
+											target="_blank">ROS Robot Programming</a> di YoonSeok Pyo, HanCheol Cho, RyuWoon Jung, TaeHoon Lim</p>
+											<p><a href="lezionicf/ROS_Robot_Programming_EN.pdf"
+											target="_blank">copia locale</a> del libro</p>
+											
+											
+												
+											
+										</td>
+									</tr>
+									
+									<tr>
+									    <td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>13/05/2020
+											</p>
+
+											<p>Lezione 22</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											
+											<p>&nbsp; Gestione dati 3D</p>
+											<p>&nbsp;  &#x2022; Point Cloud Library</p>
+											<p>&nbsp;  &#x2022; Visualizzazione point cloud</p>
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+												<a href="lezionivep1920/5.2-pointcloud.pdf">5.2-pointcloud</a>
+												<br>
+												Si ringrazia il dott. Alberto Pretto
+											</p>
+											<p>
+												<a href="lezionisi/pcl_examples.zip">pcl_examples.zip</a>
+											</p>
+											<p>
+												<a href="https://github.com/dbloisi/basic_3d_visualizer" target="_blank">
+												basic_3d_visualizer</a>
+											</p>
+											
+											<p>
+												<a href="https://github.com/dbloisi/rs_icosaf" target="_blank">
+												rs_icosaf</a><br>
+												<a href="https://drive.google.com/open?id=1V94RkousmzCrBu6bG6CchE5ITD-It93O">
+												20190912_112248.bag
+												</a>
+											</p>
+											
+											
+											
+										</td>
+									</tr>
+									
+									<tr>
+									    <td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>09/06/2020
+											</p>
+
+											<p>Lezione 23</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+										
+										<p>&nbsp; Face detection in ROS</p>
+											<p>&nbsp;  &#x2022; face detector node</p>
+											<p>&nbsp;  &#x2022; viewer node</p>	
+											
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+													
+											<p><a href="lezionivep1920/5.3-face-detection-ros.pdf">5.3-face-detection-ros</a>
+											</p>
+											
+											<p><a href="https://github.com/dbloisi/unibas_face_detector" target="_blank">
+											unibas_face_detector</a>
+											</p>
+											
+											<p><a href="https://drive.google.com/file/d/1F8pd_Cc5n67cMkWdvTZphpi7zecRJDEJ/view?usp=sharing"
+											target="_blank">face.bag</a> (3 GB)
+											</p>
+																						
+											<p><a href="https://drive.google.com/file/d/1oOMahlPdlwJkHMqXLtrLMktfx68-AGfJ/view?usp=sharing"
+											target="_blank">people.bag</a> (4 GB)											
+											</p>
+											
+											
+										</td>
+									</tr>
+									
+									<tr>
+									    <td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>10/06/2020
+											</p>
+
+											<p>Lezione 24</p>
+											
+											<p><font color="red">telematica</font></p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											
+											<p>&nbsp; RoboCup</p>
+											<p>&nbsp;  &#x2022; Robot calciatori</p>
+											<p>&nbsp;  &#x2022; Standard Platform League</p>
+											<p>&nbsp;  &#x2022; SimRobot</p>
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											
+											<p>
+												<a href="lezionivep1920/5.4-robocup.pdf">5.4-robocup</a>
+											</p>
+										</td>
+									</tr>
+									
+									<!--			
+									<tr>
+									    <td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>05/06/2019
+											</p>
+
+											<p>Lezione 21</p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											
+											<p>&nbsp; Azioni in ROS</p>
+											<p>&nbsp; &#x2022; Goal per la navigazione</p>
+											<p>&nbsp; Azioni basate su detection</p>
+										<p>&nbsp; &#x2022; Esempio red ball (turtlebot3_visual_goals)</p>
+										<p>&nbsp; &#x2022; Esempio autorace simulation</p>
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+																					
+											
+<p><a href="lezionicf/4.1-actions.pdf">4.1-actions.pdf</a>
+											</p>																			
+
+
+
+											<p><a href="https://github.com/dbloisi/turtlebot3_navigation_goals"
+											target="_blank">turtlebot3_navigation_goals</a></p>
+											<p><a href="http://wiki.ros.org/actionlib"
+											target="_blank">ROS actionlib</a></p>
+											<p><a href="http://wiki.ros.org/navigation/Tutorials/SendingSimpleGoals"
+											target="_blank">Sending Goals to the Navigation Stack</a></p>
+
+									
+<p><a href="lezionicf/turtlebot3_visual_goals.zip">turtlebot3_visual_goals</a>
+											</p>											
+
+<p><a href="https://github.com/dbloisi/turtlebot3_autorace_simulation" target="_blank">Turtlebot3 autorace simulation</a>
+											</p>	
+
+<p>
+												Fork del repo originale <a href="https://github.com/dbloisi/turtlebot3_autorace_simulation" target="_blank">Turtlebot3 autorace simulation</a> realizzato da Fabio Falezza</p>
+									
+										</td>
+									</tr>
+									-->
+									
+									
+									
+									
+									
+									
+									
+									<!--
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>12/06/2019
+											</p>
+
+											<p>Lezione XX</p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											<!--
+											<p>&nbsp;  Esercitazione</p>
+											<p>&nbsp;&nbsp;  &#x2022; DNN detection</p>
+											<p>&nbsp;&nbsp;  &#x2022; Intel Realsense sensor</p>
+											-->
+									<!--
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											 <!--
+											 <p>
+											     <a href="http://wiki.ros.org/dnn_detect">dnn_detect</a>
+                                                 <a href="https://github.com/opencv/opencv/tree/master/samples/dnn">DNN OpenCV</a>												 
+											 </p>
+											 <p>
+											     <a href="https://software.intel.com/en-us/realsense/d400">Intel Realsense D435</a>
+												 <a href="http://wiki.ros.org/realsense2_camera">realsense2_camera</a>											 
+											 </p>
+											-->
+											
+									<!--
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align:center;margin-left:auto;margin-right:auto;
+											font-family: Arial,Helvetica,sans-serif">
+											<p>19/06/2019
+											</p>
+
+											<p>Lezione XX</p>
+										</td>
+										<td style="font-family: Arial,Helvetica,sans-serif">
+											<!--
+											<p>&nbsp;  Esercitazione</p>
+											-->
+									<!--
+										</td>
+										
+										<td style="text-align:center;margin-left:auto;margin-right:auto;font-family: Arial,Helvetica,sans-serif">
+											 <!--
+											 <a href="slide.pdf">slide.pdf</a> 
+											-->
+									<!--
+										</td>
+									</tr>
+									-->
+									
+									
+									
+									
+								</tbody>
+							</table>
+                            </div>							
+                                                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->  
+
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="progetti"></a>Esempi di Progetti</h2>
+<div class="content" style="text-align:left;">
+						
+							<p><b>TurtleBot3 Autorace Simulation Circuit</b></p>
+							<ul>
+							    <li><a href="https://github.com/falfab/turtlebot3_autorace_simulation">
+								Guida autonoma di un Turtlebot3 su un circuito simulato</a></li>
+								<li>Autore: Fabio Falezza</li>
+								<li>
+							Pubblicato su <a href="http://emanual.robotis.com/docs/en/platform/turtlebot3/projects/#turtlebot3-awesome-projects">
+							TurtleBot3 Awesome Projects</li>
+							</ul>
+							
+							
+									<!--
+									<iframe width="244" height="144"
+									src="https://www.youtube.com/embed/FR27W19rrYA"
+									frameborder="0"
+									allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+									allowfullscreen>
+							        </iframe>
+									-->
+                            							
+							<hr class="divider" />
+							
+							<p><b><a href="#virtualab"></a>VirtualLab mondo virtuale</b>
+							<ul>
+								<li>
+									<a href="https://github.com/dbloisi/cyber_lab_gazebo" target="_blank">Modello del Lab Ciberfisico</a>							
+								</li>
+								<li>
+									Autori:	Enrico Marchesini, Davide Corsi, Fabio Falezza						
+								</li>								
+							</ul>
+							</p>
+							
+							<hr class="divider" />
+							
+							<p><b><a href="#holedetector"></a>Hole detector</b>
+							<ul>
+								<li>
+									<a href="../tutorial/holedetection.html" target="_blank">Detecting Holes
+									on a Workpiece Using Darknet</a>							
+								</li>
+								<li>
+									Autore:	Monica Sileo						
+								</li>								
+							</ul>
+							
+							<hr class="divider" />
+							
+							<p><b><a href="#balldetector"></a>Ball detector</b>
+							<ul>
+								<li>
+									<a href="../tutorial/balldetection.html" target="_blank">
+									How to Use OpenCV for Ball Detection
+									- RoboCup SPL Use Case
+									</a>							
+								</li>
+																
+							</ul>
+							
+							</p>
+							
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->				
+                
+            </div><!--//primary-->
+            
+			<div class="secondary col-md-4 col-sm-12 col-xs-12">                      
+				
+				<aside class="info aside section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="avvisi"></a>Avvisi</h2>
+                        <div class="content" style="text-align:left;">
+						
+						<ul>
+						
+						    <li>
+								<p><font color="red">
+									Il template per la consegna del progetto
+									pu&ograve; essere scaricato
+									<a href="lezionivep1920/template-progetto-VeP.zip">qui</a></font></p>
+							</li>
+							
+							<li>
+								<p>
+									Dal 10/03/2020 fino al termine dell'emergenza corona virus,
+									il corso verr&agrave; erogato in modalit&agrave; telematica.<br>
+									Il link alla lezione sar&agrave; pubblicato
+									5 minuti prima dell'inizio dello streaming sul
+									<a href="https://informatica.unibas.it/moodle/enrol/index.php?id=460">
+									moodle del corso</a>
+									</p>
+							</li>
+							<li>
+							        <p>La lezione del 10/03/2020 si terr&agrave;
+									in modalit&agrave; telematica.
+									Il link per seguire la lezione in streaming verr&agrave;
+									pubblicato su moodle.<br>
+									Pertanto, si invitano tutti gli studenti del corso ad iscriversi
+									al moodle del corso.
+									</p>
+							</li>
+						
+						<ul>
+							
+							
+
+                        </div><!--//content-->
+                    </div><!--//section-inner--> 					
+                </aside><!--//aside--> 			
+                             
+                <aside class="blog aside section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="link"></a>Link utili</h2>
+						<div class="content">
+							<div class="item">
+								<a href="https://dbloisi.github.io/" target="_blank">Domenico Bloisi's home page</a>
+							</div>
+							<div class="item">
+								<a href="https://sites.google.com/unibas.it/wolves" target="_blank">UNIBAS WOLVES Robot Soccer Team</a>
+										<center>
+										<img 
+											class="img-responsive project-image"
+											src="../assets/images/unibas_wolves_logo.jpg" alt="logo unibas wolves spl"
+											width="40%" height="40%"
+										/>
+								        </center>
+							</div>
+
+							<div class="item">
+								<a href="http://spl.robocup.org/" target="_blank">RoboCup Standard Platform League</a>
+                            </div>
+							
+							<div class="item">
+								<a href="http://www.ros.org/" target="_blank">ROS</a>
+                            </div>
+
+							<div class="item">
+								<a href="http://opencv.org/" target="_blank">OpenCV</a>
+                            </div>
+							
+							<div class="item">
+								<a href="../tutorial/balldetection.html" target="_blank">How to Use OpenCV for Ball Detection</a>
+							</div>
+							
+							<div class="item">
+								<a href="http://coding-robin.de/2013/07/22/train-your-own-opencv-haar-classifier.html" target="_blank">Train your own OpenCV Haar classifier</a>
+                            </div>
+							
+							
+
+
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//section-->      
+
+				
+              
+            </div><!--//secondary-->
+        </div><!--//row-->
+    </div><!--//masonry-->
+    
+    <!-- ******FOOTER****** --> 
+    <footer class="footer">
+        <div class="container text-center">
+                <small class="copyright">This template adapted from <a href="http://themes.3rdwavemedia.com" target="_blank">3rd Wave Media</a></small>
+        </div><!--//container-->
+    </footer><!--//footer-->
+ 
+ 
+</body>
+</html> 
+
