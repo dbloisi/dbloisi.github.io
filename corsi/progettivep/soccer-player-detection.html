@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<!-- VeP http://web.unibas.it/bloisi/corsi/visione-e-percezione.html -->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Football and Computer Vision</title>
+    <!-- Meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descrizione del progetto">
+    <meta name="author" content="Domenico Bloisi adapted a 3rd Wave Media template">
+    <link rel="shortcut icon" href="http://web.unibas.it/bloisi/tutorial/favicon.ico">
+    <link href="soccer-player-detection_files/css.txt" rel="stylesheet" type="text/css">
+    <link href="soccer-player-detection_files/css1.txt" rel="stylesheet" type="text/css">
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="soccer-player-detection_files/bootstrap.css">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="soccer-player-detection_files/font-awesome.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="soccer-player-detection_files/styles.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+</head>
+
+<body>
+    <!-- ******HEADER****** -->
+    <header class="header">
+        <div class="container">
+            <img class="profile-image img-responsive pull-left" src="soccer-player-detection_files/immagini/icona.png"
+                alt="Icona progetto" hegiht="100" width="100">
+            <div class="profile-content pull-left">
+                <h1 class="name">Football and Computer Vision</h1>
+                <h2 class="desc">Can Computer Vision Improve Football?</h2>
+            </div>
+
+            <div class="profile-content pull-right">
+                <img class="profile-image img-responsive pull-left"
+                    src="http://web.unibas.it/bloisi/assets/images/logo.png" alt="unibas logo" height=97 width=312 />
+
+                <p>&nbsp;</p>
+                <h3 class="desc">
+                    <a href="http://web.unibas.it/bloisi/corsi/visione-e-percezione.html" target="_blank">
+                        Corso di Visione e Percezione</a>
+                </h3>
+            </div>
+
+        </div>
+        <!--//container-->
+    </header>
+    <!--//header-->
+
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Problem</h2>
+                        <div class="content">
+                            <p>The following project uses the main techniques of <strong>Computer Vision</strong> to carry out <strong>Object Detection</strong> on amateur football games.</p>
+                            <p> The main goal is to detect the following classes: <br>
+                                <ul>
+                                    <li>Player</li>
+                                    <li>Referee</li>
+                                    <li>Linesmen</li>
+                                    <li>Goal</li>
+                                    <li>Ball</li>
+                                    <li>Corner</li>
+                                    <li>Penalty</li>
+                                    <li>Goalkeeper</li>
+                                </ul>
+                            </p>
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Motivation</h2>
+                        <div class="content">
+                            <p>Over time, the interest of sports clubs in issues and technologies belonging to Artificial Intelligence is growing.</p>
+                            <p>The goal is to implement a system capable of providing strategic indications to coaches thanks to the modeling and techniques of Machine Learning and to develop a new gaming experience for fans.</p>
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="goals"></a>Goals</h2>
+                        <div class="content">
+                            <p>Main objectives
+                            </p>
+                            <ol>
+                                <li>Dataset Preparation</li>
+                                <li>Object Detection</li>
+                                <li>Improve Detection</li>
+                                <li>Team Detection</li>
+                            </ol>
+                            </p>
+
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="dataset"></a>Method</h2>
+                        <div class="content">
+                            
+                            <h4>Dataset Preparation</h4>
+                            <p>In this phase i used amateur videos for the construction of the dataset, to be used for training, for each of which i implemented python scripts that allowed me to extract frames every x seconds, on which i then manually labeled the classes.</p>
+                            <p>The tool used to label classes is <a href="https://github.com/tzutalin/labelImg">LabelImg</a>:</p>
+
+                            <img src="soccer-player-detection_files/immagini/labelimg.png" style="width:100%; margin-bottom: 35px; margin-top: 35px">
+                            
+                            <p>LabelImg generates for each image a file marked Yolo, for example <strong>image_1.jpg</strong> will have the corresponding <strong>image_1.txt</strong> in the same folder.</p>
+                            <p>The .txt file has this type of format:</p>
+
+                            <img src="soccer-player-detection_files/immagini/filetxt.png" style="width:35%; margin-bottom: 35px; margin-top: 35px;">
+
+                            <p>It has coordinates in Yolo format <strong>object-id</strong>, <strong>center_x</strong>, <strong>center_y</strong>, <strong>width</strong>, <strong>height</strong>.</p>
+                            <p> - <strong>object-id</strong> represents the number corresponding to the category of objects that i listed in the 'classes.txt' file,</p>
+                            <p> - <strong>center_x</strong> e <strong>center_y</strong> represent the central point of the selection rectangle,</p>
+                            <p> - <strong>width</strong> e <strong>height</strong> represent the width and height of the rectangle,</p>
+                            <p>After reaching an exhaustive number of instances per class, it was possible to proceed to the Object Detection phase.</p><br>
+
+                            <h4>Object Detection</h4>
+                            <p>At this stage through the use of
+                                <a href="https://colab.research.google.com/notebooks/intro.ipynb">Google Colab</a> and the open source neural network framework
+                                <a href="https://github.com/AlexeyAB/darknet">Darknet</a>, i have implemented a
+                                <a href="https://colab.research.google.com/drive/1QiCXHth1O8FS4QKtIDkXrlxLBdSm0D87">notebook</a> able to perform Object Detection.
+                            </p>
+                            
+                            <p><strong>Darknet</strong> is an open source neural network framework written in <strong>C</strong> and <strong>CUDA</strong> which supports the calculation of <strong>CPU</strong> e <strong>GPU</strong>.</p>
+                            <p>In particular Darknet uses it as an algorithm <strong>Yolo</strong> (You Only Look Once), it allows you to recognize multiple objects and, at the same time, to identify their position and the space occupied by making a single reading of the input image.</p>
+                            <p>The concept is to resize the image in order to obtain a grid of squares, to then be analyzed through a <strong>CNN</strong>, sharing every single cell of the grid as a real image.</p>
+                           
+                            
+                            <img src="soccer-player-detection_files/immagini/yolo.png" style="width:100%; margin-bottom: 45px; margin-top: 45px;">
+                            <p>With the help of the <strong>Anchor Boxes</strong>, the algorithm is able to recognize multiple objects within a single cell, they are extrapolated directly from the training set by clustering the Bounding Boxes using <strong>K-means</strong> algorithm.</p>
+                            <p>It is also able to make predictions on <strong>3 different scales</strong>, reducing the image in order to increase accuracy.</p>
+                            <p>At the end of the processing, the bounding boxes with the highest confidence are kept, discarding the others.</p>
+
+                            <img src="soccer-player-detection_files/immagini/yolobest.png" style="width:60%; margin-bottom: 35px; margin-top: 35px">
+                            <p>The biggest advantage of using Yolo is <strong>its superb speed</strong>, it's incredibly fast and can process 45 frames per second, also understands generalized object representation, this is <strong>one of the best algorithms for object detection</strong>.</p>
+                        
+                            <p>The following project uses YOLO 4 version that uses <strong>Data Augmentation</strong></p>
+                            
+                            <p>The purpose of data augmentation is to increase the variability of the input images, so that the designed object detection model has higher robustness
+                                to the images obtained from different environments, so YoloV4 adjust the brightness, contrast, hue, saturation, and noise of an image. 
+                                <p>For geometric distortion, performs random scaling, cropping, flipping, and rotating.</p>
+                            </p>
+                            <p>It also introduces new <strong>activation functions</strong> among which i used in the project:
+                                <ul>
+                                    <li><a href="https://arxiv.org/abs/1908.08681">Mish</a>: A Self Regularized Non-Monotonic Neural Activation Function.</li>
+                                </ul>
+                            </p>
+
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="dataset"></a>Implementation and Code</h2>
+                        <div class="content">
+                            <p>In order to use the tool LabelImg and utility scripts, <a href="https://realpython.com/installing-python/">Python </a> and <a href="https://www.pyimagesearch.com/2018/09/19/pip-install-opencv/">OpenCV </a>must be installed on the local machine.</p>
+                            <p>1 - First of all find the video you want to do dataset preparation on,</p>
+                            <p>2 - Run the <a href="https://drive.google.com/open?id=1WvrGHkRyv4m7XpojbIxUuugTbULPsvqP">script</a> to extract the images from the video,</p>
+
+                            <p>3 - Now you need to install LabelImg on the machine so that you can labelize the images:
+                                <ul>
+                                    <li><a href="https://github.com/tzutalin/labelImg#windows">Windows</a></li>
+                                    <li><a href="https://github.com/tzutalin/labelImg#macos">MacOS</a></li>
+                                    <li><a href="https://github.com/tzutalin/labelImg#ubuntu-linux">Linux</a></li>
+                                </ul>
+                            </p>
+
+                            <p>4 - Create the classes.txt file which will contain the name of the classes,</p>
+                            <p>5 - Once labelImg is successfully installed, launch it by typing:
+                                <pre><code class="plaintext">$ labelImg [path to image] [classes file] </code></pre>
+                                <p>For example: 
+                                    <pre><code class="plaintext">$ labelImg /home/Downloads/dataset_preparation/frame1.jpg classes.txt </code></pre>
+                                </p>
+                            </p>
+
+                            <p>6 - Let's use the tool:</p>
+                            <img src="soccer-player-detection_files/immagini/gif.gif" style="width:100%; margin-bottom: 15px; margin-top: 15px">
+                            <p>7 - Run the <a href="https://drive.google.com/open?id=1vi_624QF5pp6_ua0H7_QNf0edQfjY3P7">script</a> to check the instances per class totalized,</p>
+                            <p>8 - After having enough images, you can go to the Google Colab platform for training and detection.</p>
+
+                            <p>9 - However, i had to solve two main problems, 
+                                the first problem concerns the <strong>non-use of the Colab notebook for over 30 minutes</strong>, 
+                                beyond which the session will stop, the second problem instead, concerns the <strong>overflow of the output</strong> produced by the cells, 
+                                using this <a href="https://drive.google.com/open?id=1d8nXOUGIRr0EVYvhcqZmMN48K6y6QsDM">script</a> these two problems will be solved.
+                                <ul>
+                                    <li>Enter a new shortcut for the entry <strong>Clear all outputs</strong> and edit the script with the new shortcut.</li>
+                                </ul></p>
+                                <img src="soccer-player-detection_files/immagini/toolbar.png" style="width:70%; margin-bottom: 25px; margin-top: 25px">
+
+                                <p>The solution is to clean the output of all cells every x seconds in order to deceive google that we are active.</p>
+                            <br>
+                            <h4>Jupyter Notebook preview is rendered below:</h4> 
+                            <iframe src="soccer-player-detection_files/yolo_darknet_code.html" style="width:100%; height:800px; margin-bottom: 20px;">
+                                <p>Your browser does not support iframes.</p>
+                              </iframe>
+                            
+                            <p>
+                                For the interactive notebook:
+                                <a href="https://colab.research.google.com/drive/1QiCXHth1O8FS4QKtIDkXrlxLBdSm0D87">Google Colab,</a>
+                            </p>
+
+                            <p>
+                                For the resources of the whole project:
+                                <a href="https://drive.google.com/drive/folders/1ym8CXvJAONLNPlYE-Je6qv-aSyB5kWnU?usp=sharing" style="color:red;">Google Drive</a>,
+                            </p>
+
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="dataset"></a>Dataset</h2>
+                        <div class="content">
+                            <p>The built dataset consists of 500 images and 500 corresponding .txt,</p>
+                            <p>Instances per class:
+                                <table>
+                                    <tr>
+                                        <th>Class</th>
+                                        <th>Instances</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Player</td>
+                                        <td>7461</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Referee</td>
+                                        <td>396</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Linesmen</td>
+                                        <td>369</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Goal</td>
+                                        <td>276</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ball</td>
+                                        <td>428</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Corner</td>
+                                        <td>413</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Penalty</td>
+                                        <td>146</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Goalkeeper</td>
+                                        <td>338</td>
+                                    </tr>
+                                </table>
+
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="training"></a>Results</h2>
+                        <div class="content">
+
+                            <h3>Qualitative Results</h3>
+
+                            <video style="width:100%; margin-bottom: 15px; margin-top: 15px" controls>
+                                <source src="soccer-player-detection_files/immagini/predictions2.mp4" type="video/mp4">
+                                prediction
+                            </video>
+
+                            <br>
+
+                            <h3>Quantitative Results</h3>
+
+                            <p>In Darknet it is necessary to divide dataset to 3 (train, val, test), only in 2 cases:
+                                <ul>
+                                    <li>(train ~5%, val ~80%, test ~15%) - <strong>to train on small Train-set</strong>, then Fine-tune on Val-set with frozen most of layers, and then check mAP on Test-set
+                                    </li>
+                                    <br>
+                                    <li>(train ~80%, val ~10%, test ~10%) - <strong>to use double-blind checking</strong>, you send Train and Val sets to another person, who will train on Train-set and check mAP on Val-set, 
+                                        then you want to check whether he cheat you and you receive the model from this person and you check it on Test-set that he didn't have
+                                    </li>
+                                </ul>
+                                In other cases should divide dataset only to 2 (train, val).
+                            </p>
+                            <br>
+                            <p>So to get the highest IoU for valid, i used all the images for both validation and training.</p>
+                            <img src="soccer-player-detection_files/immagini/iou.png" style="width:80%; margin-bottom: 35px; margin-top: 35px">
+
+                            <p><strong>Precision</strong> measures how accurate is your predictions, 
+                                <strong>Recall</strong> measures how good you find all the positives, 
+                                <strong>IoU</strong> measures the overlap between 2 boundaries and 
+                                <strong>Average precision</strong> computes the average precision value for recall value over 0 to 1.</p>
+
+                                <br>
+                                <p>Results related to 500 images,</p>
+                                <p>- 1000 iteration result:
+                                    <table>
+                                        <tr>
+                                            <th>Class</th>
+                                            <th>TP</th>
+                                            <th>FP</th>
+                                            <th>%</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Player</td>
+                                            <td>7088</td>
+                                            <td>389</td>
+                                            <td>95.76%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Referee</td>
+                                            <td>345</td>
+                                            <td>99</td>
+                                            <td>87.16%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Linesmen</td>
+                                            <td>233</td>
+                                            <td>107</td>
+                                            <td>57.73%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Goal</td>
+                                            <td>271</td>
+                                            <td>86</td>
+                                            <td>92.34%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ball</td>
+                                            <td>203</td>
+                                            <td>212</td>
+                                            <td>37.02%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Corner</td>
+                                            <td>269</td>
+                                            <td>157</td>
+                                            <td>51.85%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Penalty</td>
+                                            <td>44</td>
+                                            <td>149</td>
+                                            <td>9.69%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Goalkeeper</td>
+                                            <td>309</td>
+                                            <td>120</td>
+                                            <td>88.61%</td>
+                                        </tr>
+                                    </table>
+                                   <br>
+
+                                <p><strong>Precision</strong> = 0.87, <strong>Recall</strong> = 0.89, <strong>F1-score</strong> = 0.88, <strong>TP</strong> = 8762, <strong>FP</strong> = 1319, <strong>FN</strong> = 1075, <strong>Average IoU</strong> = 65.79% </p>
+                                <p><strong>Mean Average Precision</strong> = 65.02% </p>
+
+                                <br>
+
+                                <p>- 8000 iteration result:
+                                    <table>
+                                        <tr>
+                                            <th>Class</th>
+                                            <th>TP</th>
+                                            <th>FP</th>
+                                            <th>%</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Player</td>
+                                            <td>7315</td>
+                                            <td>124</td>
+                                            <td>98.48%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Referee</td>
+                                            <td>389</td>
+                                            <td>12</td>
+                                            <td>98.79%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Linesmen</td>
+                                            <td>374</td>
+                                            <td>22</td>
+                                            <td>98.87%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Goal</td>
+                                            <td>276</td>
+                                            <td>11</td>
+                                            <td>99.99%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ball</td>
+                                            <td>371</td>
+                                            <td>68</td>
+                                            <td>85.27%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Corner</td>
+                                            <td>405</td>
+                                            <td>16</td>
+                                            <td>97.11%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Penalty</td>
+                                            <td>106</td>
+                                            <td>45</td>
+                                            <td>61.44%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Goalkeeper</td>
+                                            <td>333</td>
+                                            <td>12</td>
+                                            <td>99.18%</td>
+                                        </tr>
+                                    </table>
+                                   <br>
+
+                                <p><strong>Precision</strong> = 0.97, <strong>Recall</strong> = 0.97, <strong>F1-Score</strong> = 0.97, <strong>TP</strong> = 9569, <strong>FP</strong> = 310, <strong>FN</strong> = 268, <strong>Average IoU</strong> = 80.80% </p>
+                                <p><strong>Mean Average Precision</strong> = 92.39%  </p>
+
+                                <br>
+
+                                <h4>Learning Curve</h4>
+
+                                <img src="soccer-player-detection_files/immagini/group.png" style="width:60%; margin-bottom: 35px; margin-top: 35px">
+                            
+                                <p>As we can see, as the iterations increase, the <strong>Avg Loss</strong> decreases and <strong>mAP</strong> increases.</p>
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="dataset"></a>Opencv Detection and Tracking</h2>
+                        <div class="content">
+                            <p>In the previous sections i carried out object detection using the native darknet framework, 
+                                in this section instead i will go to handwrite the detection using <strong>opencv</strong>, <strong>tracking techniques</strong>, 
+                                and the model obtained from training with darknet.
+                            </p>
+                            <p>The first thing to do is to <a href="https://linuxize.com/post/how-to-install-opencv-on-ubuntu-18-04/">install</a> <strong>opencv 4.3.0</strong>, 
+                                changes have been made in this release to allow opencv to recognize the new activation functions used by Yolov4 (Mish).
+                            </p>
+                            <p>The operating system used is <strong>linux ubuntu</strong> installed on the virtual machine.</p>
+                            
+                            <p>Therefore the thing to do is to run the <a href="https://drive.google.com/open?id=1jBgvQF6285rxl9U8TLn_oOIw7Alncz2X">script</a> specifying the configuration parameters inside the code.</p>
+                            
+                            <pre><code class="plaintext">$ python3 path_to_script/script.py </code></pre>
+
+                            <p>After running the script you will get the following results:</p>
+
+                            <video style="width:100%; margin-bottom: 15px; margin-top: 15px" controls>
+                                <source src="soccer-player-detection_files/immagini/results2.mp4" type="video/mp4">
+                                prediction
+                            </video>
+
+                            <p>Tracking slightly improves detection, but to obtain even more accurate detection the best way is to provide training with a larger dataset.</p>
+                            <p><strong>Whoever has the best algorithm does not win, but whoever has the most data wins!</strong></p>
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="dataset"></a>Team Detection Using Opencv</h2>
+                        <div class="content">
+                            <p>In this section, in addition to detect and track the various classes, i will classify each team according to the color of the football uniform.
+                            </p>
+
+                            <p>The idea behind it is to use Opencv to identify the mask on specific colors in order to identify the teams.</p>
+
+                            <p>I converted the image from <strong>BGR</strong> to <strong>HSV</strong> colour space, in <strong>HSV</strong> space it is then necessary to specify colour ranges for red and black colours, 
+                                as well as mask pixels that are in the threshold range and colour in black any pixels not in the mask.</p>
+                            <p>To identify team for each individual player i extracted bounding box from YoloV4 object detection 
+                                and count the percent of pixels in that bounding box that are non black to decide the team for the detected player.</p>
+
+                            <img src="soccer-player-detection_files/immagini/esempio1.png" style="width:60%; margin-bottom: 35px; margin-top: 35px">
+                            <img src="soccer-player-detection_files/immagini/esempio2.png" style="width:60%; margin-bottom: 35px; margin-top: 35px">
+                            
+                            <p>To try the script just download the <a href="https://drive.google.com/open?id=1yhRJ3dgWIueqjLtNhfVRsRYXwQDrl8dh">modified script</a> , 
+                                changes have been made to recognize the teams.
+                            
+                            <p>Therefore specifying the configuration parameters inside the code and:</p>
+                            
+                            <pre><code class="plaintext">$ python3 path_to_modified_script/modified_script.py </code></pre>
+
+                            <p>After running the script you will get the following results:</p>
+
+                            <video style="width:100%; margin-bottom: 15px; margin-top: 15px" controls>
+                                <source src="soccer-player-detection_files/immagini/colorDetection_results2.mp4" type="video/mp4">
+                                prediction
+                            </video>
+
+                            <p>The above mentioned script is specific for the detection of red and black, to recognize teams that have different colored shirts it is necessary to change the color ranges, 
+                                so the next step could be to implement an automatic detector of the 2 dominant colors using for example <strong>K-means</strong>.</p>
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+
+            </div>
+            <!--//primary-->
+
+            <div class="secondary col-md-4 col-sm-12 col-xs-12">
+                <aside class="info aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Author</h2>
+                        <div class="content">
+                            <p>Anas Mounsif</p>
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </aside>
+                <!--//aside-->
+
+
+                <aside class="blog aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">References</h2>
+                        <div class="content">
+
+                            <div class="item">
+                                <a href="http://web.unibas.it/bloisi/corsi/visione-e-percezione.html"
+                                    target="_blank">Vision and Perception Course</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="http://web.unibas.it/bloisi/" target="_blank">Domenico Bloisi's Home Page</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="http://anasmounsif.it" target="_blank">Anas Mounsif's Home Page</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="http://opencv.org/" target="_blank">OpenCV</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="https://github.com/AlexeyAB/darknet" target="_blank">Darknet</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="https://colab.research.google.com/notebooks/intro.ipynb" target="_blank">Google Colab</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="https://github.com/tzutalin/labelImg" target="_blank">LabelImg</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="https://arxiv.org/abs/1506.02640" target="_blank">Yolov4</a>
+                            </div>
+
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </aside>
+                <!--//section-->
+
+            </div>
+            <!--//secondary-->
+        </div>
+        <!--//row-->
+    </div>
+    <!--//masonry-->
+
+    <!-- ******FOOTER****** -->
+    <footer class="footer">
+        <div class="container text-center">
+            <small class="copyright">This template adapted from <a href="http://themes.3rdwavemedia.com/"
+                    target="_blank">3rd Wave Media</a></small>
+        </div>
+        <!--//container-->
+    </footer>
+    <!--//footer-->
+
+
+
+
+
+</body>
+
+</html>
