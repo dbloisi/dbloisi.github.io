@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<!-- VeP http://web.unibas.it/bloisi/corsi/visione-e-percezione.html -->
+<html lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Road Sign Detection</title>
+	<!-- Meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descrizione del progetto">
+    <meta name="author" content="Domenico Bloisi adapted a 3rd Wave Media template">    
+    <link rel="shortcut icon" href="../../favicon.ico">  
+    <link href="road-sign-detection_files/css.txt" rel="stylesheet" type="text/css">
+    <link href="road-sign-detection_files/css1.txt" rel="stylesheet" type="text/css"> 
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="road-sign-detection_files/bootstrap.css">   
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="road-sign-detection_files/font-awesome.css">
+        
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="road-sign-detection_files/styles.css">
+    
+</head> 
+
+<body>
+    <!-- ******HEADER****** --> 
+    <header class="header">
+        <div class="container">                       
+            <img class="profile-image img-responsive pull-left" src="road-sign-detection_files/immagini/icona2.png" 
+                alt="Icona progetto" hegiht="300" width="300">
+            <div class="profile-content pull-left">
+                <h1 class="name">Road Sign Detection</h1>
+				<h2 class="desc">using YOLO</h2>
+            </div>
+
+            <div class="profile-content pull-right">
+				<img class="profile-image img-responsive pull-left"
+				    src="http://web.unibas.it/bloisi/assets/images/logo.png"
+					alt="unibas logo"
+					height=97 width=312/>
+				
+				<p>&nbsp;</p>
+				<h3 class="desc">
+				<a href="http://web.unibas.it/bloisi/corsi/visione-e-percezione.html"
+				target="_blank">
+				Corso di Visione e Percezione</a>
+				</h3>
+			</div>
+			
+        </div><!--//container-->
+    </header><!--//header-->
+    
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+			
+			    <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Problem</h2>
+                        <div class="content">
+                            <p>In our project, we present a supervised method of <strong>detecting trafﬁc-signs</strong> completely based on deep Convolutional Neural Networks (CNNs). We will use <strong>Darknet</strong>, an open source neural network framework, and <strong>Google Colaboratory</strong>, a free environment that runs entirely in the cloud and provides a GPU.                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Motivation</h2>
+                        <div class="content">
+                            <p><strong>Traffic-sign recognition (TSR)</strong> is a technology by which a vehicle is able to recognize the traffic signs put on the road e.g. "Give Way" or "Obligation Straight-Turn Right" or "Pedestrian Path". This is part of the features collectively called <a href="https://en.wikipedia.org/wiki/Advanced_driver-assistance_systems">ADAS</a>. The technology is being developed by a variety of automotive suppliers. It uses image processing techniques to detect traffic signs. The detection methods can be generally divided into color-based, shape-based and learning-based methods.</p>
+                            <p>In this regard we have thought of an urban scenery on which we have placed some signals and a traffic light in a rather random order. First of all, a 3D model of the circuit was created with the <a href="https://www.autodesk.it/products/3ds-max/overview?plc=3DSMAX&term=1-YEAR&support=ADVANCED&quantity=1">3ds max</a>, followed by renderings in various perspectives, and one containing all the measurements of the circuit.</p>
+
+                            <center>
+                                <img src="road-sign-detection_files/immagini/TopView_SignalMeasures.png" style="width:80%; margin-bottom: 15; margin-top: 15px;">
+                                <img src="road-sign-detection_files/immagini/View1.png" style="width:80%; margin-bottom: 15px; margin-top: 15px;">
+                            </center>
+                            <img src="road-sign-detection_files/immagini/TopView.png" style="width:45%; margin-bottom: 30px; margin-top: 30px;">
+                            <img src="road-sign-detection_files/immagini/View2.png" style="width:45%; margin-bottom: 30px; margin-top: 30px;">
+                            <p>For 3D models click here: <a href="https://drive.google.com/drive/folders/1_kz8sZv4GVK8Ew-DgHdQn50uisFlX-rD" style="color:green;">3D Model</a></p>
+                            <p>Subsequently, the circuit was made on the basis of the 3D model. Colored cards and ribbons were used. for the construction of the roads, while the signs are made of wood. In addition, brown cardboard boxes were used to isolate the circuit from the surrounding scenery. Below are pictures of the result:</p>
+
+                            <center>
+                                <img src="road-sign-detection_files/immagini/urbanReal1.jpg" style="width:60%; margin-bottom: 15; margin-top: 15px;">
+                                <img src="road-sign-detection_files/immagini/urbanReal2.jpg" style="width:60%; margin-bottom: 15px; margin-top: 15px;">
+                                <img src="road-sign-detection_files/immagini/urbanReal3.jpg" style="width:60%; margin-bottom: 15px; margin-top: 15px;">
+                                <img src="road-sign-detection_files/immagini/urbanReal4.jpg" style="width:60%; margin-bottom: 15px; margin-top: 15px;">
+                            </center>
+                            
+                              
+                        </div>
+                        <!--//content-->
+                    </div>
+                    <!--//section-inner-->
+                </section>
+                <!--//section-->
+				
+			
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="goals"></a>Goals</h2>
+                        <div class="content">
+                            <p>Main objectives</p>
+                            <ol>
+                                <li>Creating the Dataset</li>
+                                <li>Train a Convolutional Neural Network</li>
+                                <li>Improve Object Detection</li>
+                            </ol>
+                           
+                                                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="dataset"></a>Method</h2>
+                        <div class="content">
+                            <h4>Creating the Dataset</h4>
+                            <p>In this phase, the dataset was generated starting from the sampling of the single signals placed in the foreground and captured according to different perspectives. (an example is shown below)<p>
+
+                            <img src="road-sign-detection_files/immagini/12.jpg" style="width:45%; margin-bottom: 30px; margin-top: 30px;">
+                            <img src="road-sign-detection_files/immagini/16.jpg" style="width:45%; margin-bottom: 30px; margin-top: 30px;">
+                            <img src="road-sign-detection_files/immagini/29.jpg" style="width:45%; margin-bottom: 30px; margin-top: 30px;">
+                            <img src="road-sign-detection_files/immagini/141.jpg" style="width:45%; margin-bottom: 30px; margin-top: 30px;">
+
+                            <p>The tool used to label classes is <a href="https://github.com/tzutalin/labelImg">LabelImg</a>:</p>
+
+                            <img src="road-sign-detection_files/immagini/labelImg1.png" style="width:100%; margin-bottom: 30px; margin-top: 30px;">
+
+
+                            <p>LabelImg generates for each image a file marked Yolo, for example <strong>image1.jpg</strong> will have the corresponding <strong>image1.txt</strong> in the same folder.</p>
+                            <p>The .txt file has this type of format (see <font color="red">RED</font> box): </p>
+
+                            <img src="road-sign-detection_files/immagini/labelImg2.png" style="width:100%; margin-bottom: 30px; margin-top: 30px;">
+
+                            <p>It has coordinates in Yolo format <strong>object-id</strong>, <strong>center_x</strong>, <strong>center_y</strong>, <strong>width</strong>, <strong>height</strong>.</p>
+                            <p> - <strong>object-id</strong> represents the number corresponding to the category of objects that i listed in the 'classes.txt' file,</p>
+                            <p> - <strong>center_x</strong> e <strong>center_y</strong> represent the central point of the selection rectangle,</p>
+                            <p> - <strong>width</strong> e <strong>height</strong> represent the width and height of the rectangle,</p>
+                            <p>After reaching an exhaustive number of instances per class, it was possible to proceed to the Object Detection phase.</p><br>
+
+                            <h4>Object Detection</h4>
+                            <p> The algorithm used for object detection is <strong>YOLO</strong> (You Only Look Once) which uses <strong>Daknet</strong>, an open source neural network framework written in <strong>C</strong> and <strong>CUDA</strong> that supports <strong>CPU</strong> and <strong>GPU</strong> computation.<p>
+                            <p> The CNN divides an image into regions and then it predicts the boundary boxes and probabilities for each region. It simultaneously predicts multiple bounding boxes and probabilities for those classes. <p>
+                            <p> YOLO sees the entire image during training and test time so it implicitly encodes contextual information about classes as well as their appearance. <p>
+
+                            <img src="road-sign-detection_files/immagini/yolo.png" style="width:100%; margin-bottom: 45px; margin-top: 45px;">
+
+                            <p> With the help of the <strong>Anchor Boxes</strong>, the algorithm is able to recognize multiple objects within a single cell, they are extrapolated directly from the training set by clustering the Bounding Boxes using <stong>K-means</stong> algorithm. <p>
+                            <p>It is also able to make predictions on 3 different scales, reducing the image in order to increase accuracy <p>
+                            <p>At the end of the processing, the bounding boxes with the highest confidence are kept, discarding the others.<p>
+                            <img src="road-sign-detection_files/immagini/yolo_best.png" style="width:100%; margin-bottom: 45px; margin-top: 45px">
+
+                            <p> The following project uses <strong>YOLO 4</strong> version. <p>
+                            <p> In experiments, YOLOv4 obtained an AP value of 43.5 percent (65.7 percent AP50) on the MS COCO dataset, and achieved a real-time speed of ∼65 FPS on the Tesla V100, beating the fastest and most accurate detectors in terms of both speed and accuracy. YOLOv4 is twice as fast as EfficientDet with comparable performance. In addition, compared with YOLOv3, the AP and FPS have increased by 10 percent and 12 percent, respectively.<p>
+                                                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="dataset"></a>Implementation and Code</h2>
+                        <div class="content">
+							
+						  <p>After loading the project <strong><a href="https://drive.google.com/drive/folders/1H-IzMKJYn5LyHmEnwfml5stm814YWUBL?usp=sharing" style="color:blue;">folder</a></strong> on the drive, we have created a new Google Colaboratory session for training the neural network.</p>
+                            <ul>
+                                <li>in Colaboratory file, need to change the runtime type: from <em>Runtime</em> menu select <em>Change runtime</em> type and choose <strong>GPU</strong> as Hardware accelerator.</li>
+                            </ul>
+                          <h3>Configuration</h3>
+                          <p>In this section we will proceed to configure our Darknet network.</p>
+                          <p>We will proceed to mount Google Drive on the Colab session
+                          <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">from google.colab import drive<br>
+                                                  print(<a style="color:red";>"mounting DRIVE..."</a>)<br>
+                                                  drive.mount(<a style="color:red";>'/content/gdrive'</a>)<br>
+                                                  !ln -s /content/gdrive/My\ Drive/<strong><em>root_folder</strong></em>/my_drive</</p>
+                            <p> Now we will proceed to clone the <strong><a href="https://github.com/AlexeyAB/darknet" style="color:blue;">repository</a></strong> , we're going to set some configuration parameters such as:<br>
+                                - <strong>OPENCV</strong> to build with OpenCV;<br>
+                                - <strong>GPU</strong> to build with CUDA to accelerate by using GPU;<br>
+                                - <strong>CUDNN</strong> to build with cuDNN v5-v7 to accelerate training by using GPU; <br>
+                                - <strong>CUDNN_HALF</strong> to speedup Detection 3x, Training 2x; <br></p>
+                            <p>The next step is the compile.</p>
+                            <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">!git clone <u>https://github.com/AlexeyAB/darknet</u><br>
+                                                  <a style="color:blue";>%cd</a> darknet<br>
+                                                  print(<a style="color:red";>"activating OPENCV..."</a>)<br>
+                                                  !sed -i <a style="color:red";>'s/OPENCV=0/OPENCV=1/'</a> Makefile<br><br>
+                                                  print(<a style="color:red";>"engines CUDA..."</a>)<br>
+                                                  !/usr/local/cuda/bin/nvcc --version<br><br>
+                                                  print(<a style="color:red";>"activating GPU..."</a>)<br>
+                                                  !sed -i <a style="color:red";>'s/GPU=0/GPU=1/'</a> Makefile<br><br>
+                                                  print(<a style="color:red";>"activating CUDNN..."</a>)<br>
+                                                  !sed -i <a style="color:red";>'s/CUDNN=0/CUDNN=1/'</a> Makefile<br><br>
+                                                  print(<a style="color:red";>"activating CUDNN_HALF..."</a>)<br>
+                                                  !sed -i <a style="color:red";>'s/CUDNN_HALF=0/CUDNN_HALF=1/'</a> Makefile<br><br>
+                                                  print(<a style="color:red";>"making..."</a>)<br>
+                                                  <a style="color:blue";>!</a>make<br></p>
+
+                            <p>To proceed we will load the dataset in order to use it for training.</p>
+                            <p>The idea is to insert in a folder called <strong><a href=https://drive.google.com/drive/folders/1ZY3pJzgI33PpNdYZf1PQI1k_dgzRnprW?usp=sharing style="color:black;">obj</a></strong> all the <em>images .jpg</em> with the relative <em>files.txt</em> and then compress the folder.
+                            <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">print(<a style="color:red";>"loading dataset...</a>)<br>
+                                                 <a style="color:blue";>!</a>cp /my_drive/<u>dataset_folder</u>/obj.zip ../<br>
+                            <p>And now we can unzip it.</p>
+                            <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">print(<a style="color:red";>"unziping dataset..."</a>)<br>
+                                                 <a style="color:blue";>!</a>unzip ../obj.zip -d data</u>/obj.zip ../<br>
+
+                            <p>It is important to also load the main <strong>yolo-obj.cfg</strong> configuration file, which will contain information for the construction of the network, such as the size of the images, the number of classes, filters, any augmentation techniques and more.
+                            <p> The file is located in the folder <strong><a href="https://drive.google.com/drive/folders/1am7pzlCU4InMfw1gq9Rasv_S0si_wTuQ?usp=sharing" style="color:black;">configuration_files</a></strong>.</p>
+                            <p>The main changes that have been made are shown below:<br>
+                            <ol>
+                                <li>change line batch to <u><a style="color:blue";>batch=64</a></u></li>
+                                <li>change line subdivisions to <u><a style="color:blue";>subdivisions=16</a></u></li>
+                                <li>change line max_batches to (<u><a style="color:blue";>classes*2000</a></u> but not less than number of training images, but not less than number of training images and not less than 6000): <u><a style="color:blue";>max_batches=28000</a></u> </li>
+                                <li>change line steps to 80% and 90% of max_batches: <u><a style="color:blue";>steps=22400,25200</a></u> </li>
+                                <li>set network size <u><a style="color:blue";>width=416 height=416</a></u> or any value multiple of 32: </li>
+                                <li> change line <u><a style="color:blue";>classes=14</a></u> to your number of objects in each of <strong>3 [yolo]-layers</strong>:</li>
+                                <li> change <u><a style="color:blue";>filters=57</a></u> to filters=(classes + 5)x3 in the <strong>3 [convolutional]</strong> before each [yolo] layer, keep in mind that it only has to be the last [convolutional] before each of the [yolo] layers.</li>
+                            </ol>
+                            </p> Darknet needs two more files:<br>
+                            - <strong>obj.names</strong>, which contains the name of the classes.</p> 
+                            <p>The file must be similar to the one generated during the dataset preparation phase. So it is important to respect the order of the classes..</p>
+
+                            <p style="width:500px; padding:5px; background-color: #F1F1F1; 
+                                    margin:15px;">class 0<br>class 1<br>class 2<br>class 3<br>class 4<br>...<br></p>
+
+                            <p>- <strong>obj.data</strong>, which contain information about training and number of classes.</p>
+
+                            <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;"><a style="color:red";>classes</a> = number of classes<br><a style="color:red";>train</a>  = path_to/train.txt<br><a style="color:red";>valid</a> = path_to/valid.txt<br><a style="color:red";>names</a> = path_to/obj.names<br><a style="color:red";>backup</a> = path_to/backup_folder<br></p>
+
+                            <p>For loading configuration files:</p>
+                            <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">print(<a style="color:red";>"loading yolo-obj.cfg..."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp /my_drive/configuration_files/yolo-obj.cfg ./cfg <br>
+                                                  print(<a style="color:red";>"loading yolo-obj.names.."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp /my_drive/configuration_files/yolo-obj.names ./data <br>
+                                                  print(<a style="color:red";>"loading yolo-obj.data.."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp /my_drive/configuration_files/yolo-obj.data ./data <br></p>
+
+                            <p>Darknet needs a <em>.txt</em> files for training which contains filenames of all images, each filename in new line, with path relative, for example containing:</p>
+                            <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">data/obj/img1.jpg<br>data/obj/img2.jpg<br>data/obj/img3.jpg<br>...<br></p>
+                            <p>Specifically, we decided to split the dataset in:
+                            <ul>
+                                <li>80% training set</li>
+                                <li>10% validation set</li>
+                                <li>10% test set</li>
+                            </ul>
+                        	</p>
+                            <p>We have defined a Python script that does it: <strong><a href="https://drive.google.com/file/d/18_EIV33LjGrhrBj1HcoSrKxZbYAil-5z/view?usp=sharing" style="color:blue;">generate_train.py</a></strong>
+                            <p>Then, 3 <em>.txt files</em> are generated and saved on the Drive in the <strong><a href="https://drive.google.com/drive/folders/18x1BblwTAjFrlTNq6zkIBJ2oIoLF16WU?usp=sharing" style="color:black;">dataset_preparation</a></strong> folder:
+                            <ul>
+                                <li>train.txt</li>
+                                <li>valid.txt</li>
+                                <li>test.txt</li>
+                            </ul>
+                        	</p>
+                        	<p>Darknet offers the possibility to stop training at one point and resume it at a second moment:</p>
+                        	<ul>
+                                <li>if you start the training for the first time you need to save the txt files on the Drive in the specified folder.</li>
+                                <li>if training is resumed from the point of interruption, the previously saved files must be loaded (to keep the dataset split unaltered)</li>
+                            </ul>
+                            <p>START TRAINING FROM BEGINNING:<br>
+                                <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">print(<a style="color:red";>"loading script..."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp /my_drive/py_scripts/generate_train.py ./<br>
+                                                  print(<a style="color:red";>"performing script.."</a>)<br>
+                                                  <a style="color:blue";>!</a>python generate_train.py <br>
+                                                  print(<a style="color:red";>"copying .txt in Drive.."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp ./data/train.txt /my_drive/dataset_preparation/<br>
+                                                  <a style="color:blue";>!</a>cp ./data/test.txt /my_drive/dataset_preparation/<br>
+                                                  <a style="color:blue";>!</a>cp ./data/valid.txt /my_drive/dataset_preparation/<br></p>
+                            </p>
+                            <p>RESUME TRAINING:<br>
+                                <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">print(<a style="color:red";>"loading train.txt..."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp /my_drive/dataset_preparation/train.txt ./data<br>
+                                                  print(<a style="color:red";>"loading test.txt..."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp /my_drive/dataset_preparation/test.txt ./data<br>
+                                                  print(<a style="color:red";>"loading valid.txt..."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp /my_drive/dataset_preparation/valid.txt ./data<br></p>
+                            </p>
+                            <p>For training, you need to download the pre trained weights (<strong><a href="https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137" style="color:black;">yolov4.conv.137</a></strong>) are used to speed up the workout. The approach is to use pre-trained layers to build a different network which may have similarities in the first layers.</p>
+                            <p>This file must be uploaded to the <strong><a href="https://drive.google.com/drive/folders/1x5fjHc3ngHuQpX9UIx7jDftEnzZhTLFZ?usp=sharing" style="color:black;">backup</a></strong> folder</p>
+                            <p style="width:500px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">print(<a style="color:red";>"loading pre_trained weights..."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp /my_drive/backup/yolov4.conv.137 ./<br>
+                            </p>
+                            <p>Once the configuration phase is complete, it is possible to lead to the <um>training phase</um></p>
+
+                            <h3>Training</h3>
+                            <p>In this section, we will start training the network using the command line:</p>
+                            <p style="width:600px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">!./darknet detector train data/obj.data cfg/yolo-obj.cfg yolov4.conv.137 -dont_show
+                            </p>
+                            <ul>
+                                <li>file yolo-obj_last.weights will be saved to the backup folder for each 100 iterations</li>
+                                <li>file yolo-obj_xxxx.weights will be saved to the backup folder for each 1000 iterations</li>
+                            </ul>
+                            <p>It is also possible to stop the training at a point (for example after 2000 iterations) and start again later from it:</p>
+                            <p style="width:800px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">!./darknet detector train data/obj.data cfg/yolo-obj.cfg /my_drive/backup/yolo-obj_last.weights -dont_show
+                            </p>
+                            <h3>Detection</h3>
+                            <p>When the training is complete, we will perform object detection on the videos and save the results on the Drive.</p>
+                            <ul>
+                                <li>increase network-resolution by set in your <i>.cfg</i>-file <i>height=608</i> and <i>width=608</i></li>
+                                <li>change in obj.data file, from <u>valid = path_to/valid.txt</u> to <U>valid = path_to/test.txt</U></li>
+                            </ul>
+                        	</p>
+                        	<p>Run the following command lines:</p>
+                            <p style="width:800px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;">print(<a style="color:red";>"detecting..."</a>)<br>
+                                                  <a style="color:blue";>!</a>./darknet detector demo data/obj.data cfg/yolo-obj.cfg /my_drive/backup/yolo-obj_xxxx.weights -dont_show /my_drive/test_videos/name_video -thresh .7 -i 0 -out_filename prediction.avi<br>
+                                                  print(<a style="color:red";>"save prediction in Drive..."</a>)<br>
+                                                  <a style="color:blue";>!</a>cp prediction.avi /my_drive/predictions/name_prediction
+                            </p>
+                            <p>For the resources Drive of the whole project: <a href="https://drive.google.com/drive/folders/1H-IzMKJYn5LyHmEnwfml5stm814YWUBL?usp=sharing" style="color:red;">Google Drive</a></p>
+                            <p>For all Python code on Github: <a href="https://github.com/Antario-Costena/SignalDetection/blob/Project/py_scripts/YOLODarknet_code.ipynb" style="color:green;">YOLODarknet_code.ipynb</a></p>
+
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="dataset"></a>Dataset</h2>
+                        <div class="content">
+                            <p>The dataset consists of approximately 4780 images and 4780 corresponding .txt files.</p>
+
+                                <html>
+								<head>
+								<style>
+								#customers {
+								  font-family: Arial, Helvetica, sans-serif;
+								  border-collapse: collapse;
+								  width: 100%;
+								}
+
+								#customers td, #customers th {
+								  border: 1px solid #ddd;
+								  padding: 8px;
+								}
+
+								#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+								#customers tr:hover {background-color: #ddd;}
+
+								#customers th {
+								  padding-top: 12px;
+								  padding-bottom: 12px;
+								  text-align: left;
+								  background-color: #4CAF50;
+								  color: white;
+								}
+								</style>
+								</head>
+								<body>
+
+								<table id="customers">
+								  <tr>
+								    <th>Class</th>
+								    <th>n° Images</th>
+								  </tr>
+								  <tr>
+								    <td>Intersection</td>
+                                    <td>260</td>
+								  </tr>
+								  <tr>
+								    <td>Give Way</td>
+                                    <td>270</td>
+								  </tr>
+								  <tr>
+								    <td>Right of Way</td>
+                                    <td>260</td>
+								  </tr>
+								  <tr>
+								    <td>No Thoroughfare</td>
+                                    <td>280</td>
+								  </tr>
+								  <tr>
+								    <td>No Overtaking</td>
+                                    <td>270</td>
+								  </tr>
+								  <tr>
+								    <td>No Entry</td>
+                                     <td>270</td>
+								  </tr>
+								  <tr>
+								     <td >Obligation Straight-Turn Right</td>
+                                     <td>300</td>
+								  </tr>
+								  <tr>
+								  	<td>Car Park</td>
+                                    <td>540</td>
+								  </tr>
+								  <tr>
+								    <td>Pedestrian Path</td>
+                                    <td>290</td>
+								  </tr>
+								  <tr>
+								    <td>Stop</td>
+                                    <td>290</td>
+								  </tr>
+								  <tr>
+								   <td>Crosswalk</td>
+                                    <td>330</td>
+								  </tr>
+								  <tr>
+								    <td>Green Light</td>
+                                    <td>530</td>
+								  </tr>
+								  <tr>
+								    <td>Yellow Light</td>
+                                    <td>320</td>
+								  </tr>
+								  <tr>
+								    <td>Red Light</td>
+                                     <td>570</td>
+								  </tr>
+								</table>
+
+								</body>
+								</html>
+								
+								<p></p>	
+                                                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"><a id="training"></a>Results</h2>
+                        <div class="content">
+                            							
+								
+							<h3>Qualitative Results</h3>
+
+                            <p>The video was made by placing a webcam on a hand-guided machine and tested for our neural network.</p>
+                            <p>The following result shows the detection performed using <i>8000 weight</i> as a model.</p>
+                            <p>As can be seen, two detection errors are committed which occur mainly on very similar signals and only when they are far away; the first error occurs between the Pedestrian Path and Car Park signs, the second between No Thoroughfare and No Entry.</p>
+
+							<video style="width:100%; margin-bottom: 15px; margin-top: 15px" controls>
+                                <source src="road-sign-detection_files/immagini/demoDetection2.mp4" type="video/mp4">
+                                prediction
+                            </video>
+							
+													
+							<h3>Quantitative Results</h3>
+							<p>Object detection metrics serve as a measure for evaluating model performance in an object detection task. We use the concept of <i>Intersection over Union</i> (<strong>IoU</strong>).</p>
+                            <p>IoU computes intersection over the union of the two bounding boxes; the bounding box for the ground truth and the predicted bounding box.</p>
+                            <center>
+                                <img src="road-sign-detection_files/immagini/IoU.png" style="width:50%; margin-bottom: 15px; margin-top: 15px">
+                            </center>
+                            <p>An IoU of 1 implies that predicted and the ground-truth bounding boxes perfectly overlap.</p>
+                            <p>In Darknet it is necessary to divide dataset to 3 (train, val, test), only in 2 cases:</p>
+                            <ul>
+                                    <li>train ~5%, val ~80%, test ~15%) - <strong>to train on small Train-set</strong></s>, then Fine-tune on Val-set with frozen most of layers, and then check mAP on Test-set</li>
+                                    <li>train ~80%, val ~10%, test ~10%) - to use <strong>double-blind checking</strong>, you send Train and Val sets to another person, who will train on Train-set and check mAP on Val-set, then you want to check whether he cheat you and you receive the model from this person and you check it on Test-set that he didn't have</li>
+                            </ul>
+                            <p>In other cases should divide dataset only to 2 (train, val).</p>
+
+
+                            <p>We decided to split the dataset in <strong>train ~80%, val ~10%, test ~10%.</strong></p>
+
+                            <p>Some basic concepts used by the metrics:
+                                <ul>
+                                    <li><strong>True Positive (TP)</strong>: A correct detection. Detection with IOU ≥ <i>threshold</i></li>
+                                    <li><strong>False Positive (FP)</strong>: A wrong detection. Detection with IOU < <i>threshold</i></li>
+                                    <li><strong>False Negative (FN)</strong>: A ground truth not detected</li>
+                                    <li><strong>True Negative (TN)</strong>: Does not apply. It would represent a corrected misdetection. In the object detection task there are many possible bounding boxes that should not be detected within an image. Thus, TN would be all possible bounding boxes that were corrrectly not detected (so many possible boxes within an image). That's why it is not used by the metrics.</li>
+                                </ul>
+                            </p>
+                            <center>
+                                <img src="road-sign-detection_files/immagini/metrics.png" style="width:50%; margin-bottom: 15px; margin-top: 15px">
+                            </center>
+                            <p><strong>Precision</strong> is the ability of a model to identify only the relevant objects; it is the percentage of correct positive predictions.</p>
+                            <p><strong>Recall</strong>  is the ability of a model to find all the relevant cases (all ground truth bounding boxes); it is the percentage of true positive detected among all relevant ground truths</p>
+                            <p><strong>Average precision</strong> computes the average precision value for recall value over 0 to 1.</p>
+                            <p>All metrics, which refer to the performance of a given model, have been defined as follows:
+                                <p style="width:800px; padding:5px; background-color: #F1F1F1;
+                                    margin:15px;"><a style="color:blue";>!</a>cp /my_drive/backup/yolo-obj_xxxx.weights ./<br>
+                                                  <a style="color:blue";>!</a>./darknet detector map data/obj.data cfg/yolo-obj.cfg yolo-obj_xxxx.weights<br>
+                            </p>
+                               <p>Metrics of 1000 iterations:</p>
+
+                                <html>
+								<head>
+								<style>
+								#customers {
+								  font-family: Arial, Helvetica, sans-serif;
+								  border-collapse: collapse;
+								  width: 100%;
+								}
+
+								#customers td, #customers th {
+								  border: 1px solid #ddd;
+								  padding: 8px;
+								}
+
+								#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+								#customers tr:hover {background-color: #ddd;}
+
+								#customers th {
+								  padding-top: 12px;
+								  padding-bottom: 12px;
+								  text-align: left;
+								  background-color: #4CAF50;
+								  color: white;
+								}
+								</style>
+								</head>
+								<body>
+
+								<table id="customers">
+								  <tr>
+								    <th>Class</th>
+								    <th>TP</th>
+								    <th>FP</th>
+								    <th>%</th>
+								  </tr>
+								  <tr>
+								    <td>Intersection</td>
+                                     <td>10</td>
+                                     <td>32</td>
+                                     <td>23.10%</td>
+								  </tr>
+								  <tr>
+								    <td>Give Way</td>
+                                    <td>20</td>
+                                    <td>21</td>
+                                    <td>52.55%</td>
+								  </tr>
+								  <tr>
+								    <td>Right of Way</td>
+                                    <td>29</td>
+                                    <td>40</td>
+                                    <td>40.02%</td>
+								  </tr>
+								  <tr>
+								    <td>No Thoroughfare</td>
+                                    <td>31</td>
+                                    <td>32</td>
+                                    <td>72.77%</td>
+								  </tr>
+								  <tr>
+								    <td>No Overtaking</td>
+                                    <td>12</td>
+                                    <td>18</td>
+                                    <td>25.22%</td>
+								  </tr>
+								  <tr>
+								    <td>No Entry</td>
+                                    <td>35</td>
+                                    <td>62</td>
+                                    <td>34.81%</td>
+								  </tr>
+								  <tr>
+								    <td >Obligation Straight-Turn Right</td>
+                                    <td>22</td>
+                                    <td>35</td>
+                                    <td>35.79%</td>
+								  </tr>
+								  <tr>
+								    <td>Car Park</td>
+                                    <td>34</td>
+                                    <td>18</td>
+                                    <td>74.78%</td>
+								  </tr>
+								  <tr>
+								    <td>Pedestrian Path</td>
+                                    <td>41</td>
+                                    <td>88</td>
+                                    <td>37.64%</td>
+								  </tr>
+								  <tr>
+								    <td>Stop</td>
+                                    <td>36</td>
+                                    <td>47</td>
+                                    <td>61.50%</td>
+								  </tr>
+								  <tr>
+								   <td>Crosswalk</td>
+                                    <td>42</td>
+                                    <td>53</td>
+                                    <td>40.92%</td>
+								  </tr>
+								  <tr>
+								    <td>Green Light</td>
+                                    <td>39</td>
+                                    <td>35</td>
+                                    <td>82.77%</td>
+								  </tr>
+								  <tr>
+								    <td>Yellow Light</td>
+                                    <td>14</td>
+                                    <td>21</td>
+                                    <td>87.73%</td>
+								  </tr>
+								  <tr>
+								    <td>Red Light</td>
+                                    <td>61</td>
+                                    <td>76</td>
+                                    <td>47.21%</td>
+								  </tr>
+								</table>
+
+								</body>
+								</html>
+
+								<p></p>
+                                <p><strong>Precision</strong> =  0.42, <strong>Recall</strong> = 0.74, <strong>F1-score</strong> = 0.54, <strong>TP</strong> = 426, <strong>FP</strong> = 578 <strong>FN</strong> = 149, <strong>Average IoU</strong> = 28.51 %, <strong>Mean Average Precision</strong> = 51.16 %
+                        
+                            <p>Metrics of 8000 iterations:</p>
+
+                                <html>
+								<head>
+								<style>
+								#customers {
+								  font-family: Arial, Helvetica, sans-serif;
+								  border-collapse: collapse;
+								  width: 100%;
+								}
+
+								#customers td, #customers th {
+								  border: 1px solid #ddd;
+								  padding: 8px;
+								}
+
+								#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+								#customers tr:hover {background-color: #ddd;}
+
+								#customers th {
+								  padding-top: 12px;
+								  padding-bottom: 12px;
+								  text-align: left;
+								  background-color: #4CAF50;
+								  color: white;
+								}
+								</style>
+								</head>
+								<body>
+
+								<table id="customers">
+								  <tr>
+								    <th>Class</th>
+								    <th>TP</th>
+								    <th>FP</th>
+								    <th>%</th>
+								  </tr>
+								  <tr>
+								    <td>Intersection</td>
+                                    <td>29</td>
+                                    <td>0</td>
+                                    <td>100.00%</td>
+								  </tr>
+								  <tr>
+								    <td>Give Way</td>
+                                    <td>27</td>
+                                    <td>1</td>
+                                    <td>99.74%</td>
+								  </tr>
+								  <tr>
+								    <td>Right of Way</td>
+                                    <td>37</td>
+                                    <td>0</td>
+                                    <td>100.00%</td>
+								  </tr>
+								  <tr>
+								    <td>No Thoroughfare</td>
+                                    <td>33</td>
+                                    <td>0</td>
+                                    <td>99.76%</td>
+								  </tr>
+								  <tr>
+								    <td>No Overtaking</td>
+                                    <td>34</td>
+                                    <td>0</td>
+                                    <td>100.00%</td>
+								  </tr>
+								  <tr>
+								    <td>No Entry</td>
+                                    <td>46</td>
+                                    <td>4</td>
+                                    <td>97.83%</td>
+								  </tr>
+								  <tr>
+								     <td >Obligation Straight-Turn Right</td>
+                                     <td>32</td>
+                                     <td>0</td>
+                                     <td>100.00%</td>
+								  </tr>
+								  <tr>
+								    <td>Car Park</td>
+                                    <td>36</td>
+                                    <td>0</td>
+                                    <td>100.00%</td>
+								  </tr>
+								  <tr>
+								    <td>Pedestrian Path</td>
+                                    <td>51</td>
+                                    <td>1</td>
+                                    <td>93.32%</td>
+								  </tr>
+								  <tr>
+								    <td>Stop</td>
+                                    <td>44</td>
+                                    <td>0</td>
+                                    <td>100.00%</td>
+								  </tr>
+								  <tr>
+								   <td>Crosswalk</td>
+                                   <td>52</td>
+                                   <td>1</td>
+                                   <td>99.78%</td>
+								  </tr>
+								  <tr>
+								    <td>Green Light</td>
+                                    <td>58</td>
+                                    <td>0</td>
+                                    <td>100.00%</td>
+								  </tr>
+								  <tr>
+								    <td>Yellow Light</td>
+                                    <td>28</td>
+                                    <td>0</td>
+                                    <td>100.00%</td>
+								  </tr>
+								  <tr>
+								    <td>Red Light</td>
+                                    <td>80</td>
+                                    <td>0</td>
+                                    <td>100.00%</td>
+								  </tr>
+								</table>
+
+								</body>
+								</html>
+
+								<p></p>
+                                <p><strong>Precision</strong> =  0.99, <strong>Recall</strong> = 1.00, <strong>F1-score</strong> = 0.99, <strong>TP</strong> = 587, <strong>FP</strong> = 7, <strong>FN</strong> = 2, <strong>Average IoU</strong> = 84.66 %, <strong>Mean Average Precision</strong> = 99.74 %
+
+                             
+                                <h4>Learning Curve</h4>
+                                <img src="road-sign-detection_files/immagini/learning_curve.png" style="width:100%; margin-bottom: 35px; margin-top: 35px">
+                            
+                                <p>As we can see, as the iterations increase, the <strong>Avg Loss</strong> decreases and remains more or less constant around the value <strong>0.50</strong></p>
+
+							
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+                
+            </div><!--//primary-->
+            
+			<div class="secondary col-md-4 col-sm-12 col-xs-12">
+                <aside class="info aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Authors</h2>
+                        <div class="content">
+                            <p>Antonio Costini</p>
+                            <p>Rosario Catena</p>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </aside><!--//aside-->                        
+								
+                             
+                <aside class="blog aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">References</h2>
+						<div class="content">
+						    
+							<div class="item">
+								<a href="http://web.unibas.it/bloisi/corsi/visione-e-percezione.html"
+								target="_blank">Vision and Perception Course</a>
+							</div>
+
+							<div class="item">
+								<a href="http://web.unibas.it/bloisi/" target="_blank">Domenico Bloisi's home page</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="https://pjreddie.com/darknet/" target="_blank">Yolo</a>
+                            </div>
+
+							<div class="item">
+                                <a href="https://github.com/AlexeyAB/darknet" target="_blank">Darknet</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="http://opencv.org/" target="_blank">OpenCV</a>
+                            </div>
+
+
+                            <div class="item">
+                                <a href="https://colab.research.google.com/notebooks/intro.ipynb" target="_blank">Google Colab</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="https://github.com/tzutalin/labelImg" target="_blank">LabelImg</a>
+                            </div>
+
+                            <div class="item">
+                                <a href="https://github.com/Antario-Costena/SignalDetection" target="_blank">Github</a>
+                            </div>
+
+							
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//section-->                            
+              
+            </div><!--//secondary-->    
+        </div><!--//row-->
+    </div><!--//masonry-->
+    
+    <!-- ******FOOTER****** --> 
+    <footer class="footer">
+        <div class="container text-center">
+                <small class="copyright">This template adapted from <a href="http://themes.3rdwavemedia.com/" target="_blank">3rd Wave Media</a></small>
+        </div><!--//container-->
+    </footer><!--//footer-->
+ 
+ 
+
+ 
+
+</body></html>
