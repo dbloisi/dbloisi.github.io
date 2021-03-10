@@ -1,0 +1,19 @@
+.circuital-scheme,
+.architecture,
+.architecture-2,
+.libfreenect,
+.kinect_visualizer {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+p {
+    text-align: justify;
+}
+
+iframe {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

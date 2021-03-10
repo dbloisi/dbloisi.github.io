@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<!-- VeP http://web.unibas.it/bloisi/corsi/visione-e-percezione.html -->
+<html lang="en"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RGB-D SLAM</title>
+	<!-- Meta -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descrizione del progetto">
+    <meta name="author" content="Domenico Bloisi adapted a 3rd Wave Media template">    
+    <link rel="shortcut icon" href="../../favicon.ico">  
+    <link href="rgbd-slam_files/css.txt" rel="stylesheet" type="text/css">
+    <link href="rgbd-slam_files/css1.txt" rel="stylesheet" type="text/css"> 
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="rgbd-slam_files/bootstrap.css">   
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="rgbd-slam_files/font-awesome.css">
+    <link rel="stylesheet" href="rgbd-slam_files/style.css">
+        
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="rgbd-slam_files/styles.css">
+    
+</head> 
+
+<body>
+    <!-- ******HEADER****** --> 
+    <header class="header">
+        <div class="container">                       
+            <img class="profile-image img-responsive pull-left" src="rgbd-slam_files/img/robot/photo_2020-06-20_21-32-16.jpg" hegiht="100" width="100">
+            <div class="profile-content pull-left">
+                <h1 class="name">RGB-D SLAM<br>
+				con veicolo teleoperato</h1>
+                <h2 class="desc">Creazione e sviluppo di un veicolo<br>
+				teleoperato in grado di effettuare operazioni di localizzazione<br>
+				e mappatura dell'ambiente circostante.</h2>
+            </div>
+
+            <div class="profile-content pull-right">
+				<img class="profile-image img-responsive pull-left"
+				    src="http://web.unibas.it/bloisi/assets/images/logo.png"
+					alt="unibas logo"
+					height=97 width=312/>
+				
+				<p>&nbsp;</p>
+				<h3 class="desc">
+				<a href="http://web.unibas.it/bloisi/corsi/visione-e-percezione.html"
+				target="_blank">
+				Corso di Visione e Percezione</a>
+				</h3>
+			</div>
+			
+        </div><!--//container-->
+    </header><!--//header-->
+    
+    <div class="container sections-wrapper">
+        <div class="row">
+            <div class="primary col-md-8 col-sm-12 col-xs-12">
+			
+			    <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Problema</h2>
+                        <div class="content">
+                            <p>
+                                Un problema di grande importanza nell'ambito della robotica mobile è quello di creare dei veicoli in grado di sapersi localizzare nello spazio circostante - sia esso conosciuto o meno - e di saper eventualmente creare una mappa di questo ambiente.<br><br>
+
+                                La realizzazione del presente elaborato progettuale consta di due parti:
+                                <ul>
+                                    <li>
+                                        la realizzazione fisica del robot mobile;
+                                    </li>
+                                    <li>
+                                        l'implementazione di un sistema software in grado di gestire le operazioni di movimento, localizzazione e mappatura.
+                                    </li>
+                                </ul>
+
+							</p>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Motivazioni</h2>
+                        <div class="content">
+                            <p>
+                                La realizzazione di un robot mobile in grado di sapersi localizzare nell'ambiente circostante e creare una mappa di esso può risultare molto utile in diversi ambiti, dall'industria (e.g, robot collaborativi in grado di muoversi autonomamente lungo le linee di montaggio) fino ad arrivare a contesti più piccoli come quello domestico (e.g., robot aspirapolvere Roomba).<br><br>
+							</p>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+			
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Obiettivi</h2>
+                        <div class="content">
+                            <p>
+                                Gli obiettivi del presente elaborato progettuale sono stati i seguenti:
+                                <ul>
+                                    <li>
+                                        assemblare un robot fisico a tre ruote;
+                                    </li>
+                                    <li>
+                                        implementare un sistema di guida teleoperata attraverso l'utilizzo della tastiera del computer;
+                                    </li>
+                                    <li>
+                                        acquisire le immagini dell'ambiente circostante attraverso il sensore RGBD del Microsoft XBOX Kinect v1;
+                                    </li>
+                                    <li>
+                                        eseguire le operazioni di localizzazione e mappatura attraverso il processo SLAM.
+                                    </li>
+                                </ul>
+							</p>                 
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Assemblaggio del robot mobile</h2>
+                        <div class="content">
+                            <p>
+                                Il processo di assemblaggio del robot mobile è stato ispirato dal lavoro svolto da Luca Iocchi, dell'Università La Sapienza di Roma, nell'ambito della realizzazione di un robot mobile economico e facile da costruire e programmare.<br><br>
+
+                                In linea con quanto proposto dal creatore di MARRtino - così si chiama il robot precedentemente citato - si sono utilizzate le seguenti componenti:
+                                <ul>
+                                    <li>
+                                        <b>Unità di elaborazione</b>: Raspberry Pi 4 Model B con 2 GB di memoria RAM;
+                                    </li>
+                                    <li>
+                                        <b>Microcontrollore</b>: Arduino Uno;
+                                    </li>
+                                    <li>
+                                        <b>Scheda motore</b> L298N, ponte H a doppio canale;
+                                    </li>
+                                    <li>
+                                        <b>Sensore di visione</b>: Microsoft XBOX Kinect v1;
+                                    </li>
+                                    <li>
+                                        <b>Kit ruota</b>: 25GA370, 2 motori DC 6V con alberi motore, ingranaggi e ruote;
+                                    </li>
+                                    <li>
+                                        <b>Alimentazione unità di elaborazione</b>: powerbank Tqka 10000mAh, output 5V-2.1A;
+                                    </li>
+                                    <li>
+                                        <b>Alimentazione sensore di visione e servomotori</b>: batteria al piombo 12V-7.2Ah.
+                                    </li>
+                                </ul><br>
+
+                                Nella seguente immagine è illustrato lo schema circuitale seguito nell'assemblaggio delle varie parti.                                
+                            </p>     
+                            <img class='circuital-scheme' src="rgbd-slam_files/img/progettovp_scheme.png" width='500px' height='600px'></img>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Guida teleoperata</h2>
+                        <div class="content">
+                            <p>
+                                La realizzazione delle operazioni di guida teleoperata ha visto l'implementazione di due script Python e una ruotine in codice C/C++ per l'Arduino.<br><br>
+                                L'architettura di esecuzione si basa sul principio client-server, dove c'è una macchina in ascolto e una macchina che invia richieste di esecuzione. Il robot mobile con su montato il Raspberry in questo caso è considerato il server perché attua fisicamente le richieste di movimento; il client è il computer remoto attraverso il quale l'utente attua le richieste. Nel seguito è illustrata l'architettura di riferimento.
+                            </p>
+                            <img class='architecture' src="rgbd-slam_files/img/architecture.png" width='450px' height='400px'></img>
+                            <h4>Arduino</h4>
+                            <h5><code>arduino_cmd.ino</code></h5>
+                            <p>In questa ruotine è implementata la logica di basso livello della navigazione. Nel dettaglio:</p>
+                            <ul>
+                                <li>
+                                    si è effettuata la configurazione dei pin di input e degli encoder di velocità seguendo il circuito presentato nella sezione precedente;
+                                    
+                                </li>
+                                <li>
+                                    si sono definite le primitive di movimento <code>forward()</code>, <code>backward()</code>, <code>left()</code>, <code>right()</code> e <code>stop()</code>;
+                                </li>
+                                <li>
+                                    si sono definite le primitive di incremento delle velocità lineare e angolare <code>increaseVel()</code> e <code>increaseVel()</code>;
+                                </li>
+                            </ul>
+                            <h4>Python - Lato client</h4>                 
+                            <h5><code>teleop_talker.py</code></h5>
+                            <p>
+                                Attraverso questo script si crea il nodo ROS <code>/teleop_talker</code>, si catturano gli input inseriti da tastiera dell'utente e si publicano come messaggi sul topic <code>/teleop_keyboard</code>. Nel dettaglio, per la navigazione da tastiera vengono utilizzati i seguenti comandi:
+                                <ul>
+                                    <li><code>w</code>: movimento in avanti;</li>
+                                    <li><code>a</code>: movimento a sinistra;</li>
+                                    <li><code>s</code>: movimento indietro;</li>
+                                    <li><code>d</code>: movimento a destra;</li>
+                                    <li><code>q</code>: decremento velocità;</li>
+                                    <li><code>e</code>: incremento velocità;</li>
+                                </ul>
+                                
+                                Per la creazione dello script è stato utilizzato il modulo Python <code>pynput</code>, utile a gestire gli input dell'utente.
+                            </p>
+                            <h4>Python - Lato server</h4>
+                            <h5><code>teleop_listener.py</code></h5>
+                            <p>
+                                Attraverso questo script si crea il nodo ROS <code>/teleop_listener</code>, sottoscrittore del topic <code>/teleop_keyboard</code>, e si rimane in ascolto di eventuali messaggi. Ogni nuovo messaggio viene successivamente inoltrato all'Arduino attraverso messaggi inviati alla porta seriale.<br><br>
+
+                                Per la creazione di questo script è stato utilizzato il modulo Python <code>pyserial</code>, utile per gestire la comunicazione tra il Raspberry e l'Arduino.
+                            </p>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Acquisizione immagini dal Kinect</h2>
+                        <div class="content">
+                            <p>
+                                Per gestire l'acquisizione delle immagini dal Kinect al Raspberry si è utilizzata la libreria multipiattaforma <code>libfreenect</code>.<br><br>
+
+                                E' possibile visualizzare le immagini RGB e di profondità sul Raspberry, attraverso il comando <code>freenect-glview</code>, oppure utilizzando la logica client-server accennata nella sezione precedente utilizzando gli script Python di utilità <code>kinect_listener.py</code> e <code>kinect_visualizer.py</code>. Nel seguito sono rappresentate, rispettivamente, la visualizzazione delle immagini RGB e di profondità attraverso <code>freenect-glview</code> e attraverso l'accoppiata <code>kinect_listener.py</code>-<code>kinect_visualizer.py</code>.
+                            </p>
+                            <img class='libfreenect' src="rgbd-slam_files/img/libfreenect.jpg" width='450px' height='200px'></img>
+                            <br>
+                            <img class='kinect_visualizer' src="rgbd-slam_files/img/kinect_visualizer.jpg" width='450px' height='200px'></img><br>
+                            <p>
+                                L'architettura client-server sopra accennata è rappresentata nell'immagine sottostante.
+                            </p>
+                            <img class='architecture-2' src="rgbd-slam_files/img/architecture_2.png" width='100%' height='400px'></img><br><br>
+                            <p>
+                                Negli script <code>kinect_listener.py</code> e <code>kinect_visualizer.py</code> sono stati utilizzati i moduli <code>opencv-python</code>, per la gestione della visualizzazione delle immagini, e <code>cv_bridge</code> per convertire/deconvertire l'immagine ROS in immagine OpenCV.
+                            </p>
+                            <h5>Caveat</h5>
+                            <p>
+                                Purtroppo l'acquisizione delle immagini RGB e di profondità non è stata immediata a causa di limitazioni hardware imposte dal Raspberry. Infatti, l'utilizzo della libreria <code>libfreenect</code> non è da sola bastato a permettere il corretto invio delle immagini dal sensore di visione all'unità di elaborazione. Dopo numerose ricerche, si è scoperto sperimentalmente che un modo per correggere il problema è quello di saturare il flusso dei dati USB inserendo in tutte le porte dei dispositivi. Fatto ciò, il problema scompare e non si ha più perdita di informazione.
+                            </p>		
+                                                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">RGB-D SLAM</h2>
+                        <div class="content">
+                            <p>
+                                Per attuare le operazioni di RGB-D SLAM è stata utilizzata la libreria RTAB-Map (Real-Time Appearance-Based Mapping), la quale può essere utilizzata per generare una nuvola di punti dell'ambiente circostante e creare una mappa per la navigazione.<br><br>
+                                RTAB-Map si basa sulla generazione di un grafo e l'utilizzo di un rilevatore di chiusura Bayesiano per determinare quanto verosimilmente un'immagine provenga da un luogo già visitato oppures no. Quando un'ipotesi di chiusura è verosimile, un nuovo vincolo viene aggiunto al grafo e la mappa dell'ambiente circostante ottimizzata di conseguenza. Per limitare il carico di lavoro necessario all'individuazione delle chiusure e alla successiva ottimizzazione, viene utilizzato un approccio avanzato di gestione della memoria. Questo permette a RTAB-Map, anche se utilizzato in ambienti di dimensioni elevate, di gestire in tempo reale le operazioni di mappatura e localizzazione.<br><br>
+                                Nel seguito è presentata un'immagine di RTAB-Map in azione.
+                            </p>
+                            <img class='architecture' src="rgbd-slam_files/img/rtabmap.jpg" width='600px' height='350px'></img>         
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+                
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Implementazione e Codice</h2>
+                        <div class="content">
+                            <h4>Implementazione</h4>
+                            <p>
+                                Le tecnologie utilizzate al fine di implementare quanto nelle sezioni precedenti descritto sono state:
+                                <ul>
+                                    <li>
+                                        Python 3
+                                        <ul>
+                                            <li>
+                                                pynput
+                                            </li>
+                                            <li>
+                                                pyserial
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        Python 2
+                                        <ul>
+                                            <li>
+                                                opencv-python
+                                            </li>
+                                            <li>
+                                                cv_bridge
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        ROS Melodic (Lato Client) e ROS Noetic (Lato Server)
+                                    </li>
+                                    <li>
+                                        RTAB-Map
+                                    </li>
+                                </ul>
+                            </p>
+                            <h4>Codice sorgente</h4>
+                            <p>
+                                <a href="https://github.com/biancofla/rgbd-slam-with-teleop-vehicle"
+				                target="_blank">
+				                Link repository GitHub</a>
+                            </p>                     
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+				
+				
+				<section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading">Risultati</h2>
+                        <div class="content">
+	
+                            <h4>Risultati qualitativi</h4>
+                            <h5>Guida teleoperata</h5>
+							<iframe width="420" height="315" src="https://www.youtube.com/embed/TUHRMXqMq3Y">
+                            </iframe>
+                            <h5>Acquisizione e visualizzazione immagini RGB e di profondità</h5>
+                            <iframe width="420" height="315" src="https://www.youtube.com/embed/f8B4taeDggw">
+                            </iframe>
+                            <iframe width="420" height="315" src="https://www.youtube.com/embed/viF9TI1LlGg">
+                            </iframe>
+                            <h5>RGB-D SLAM</h5>
+                            <iframe width="420" height="315" src="https://www.youtube.com/embed/qfKFda2wjDI">
+                            </iframe>
+                            <h4>Risultati quantitativi</h4>
+                            <p>
+                                Per valutare oggettivamente le performance di esecuzione delle operazioni di SLAM sono state messe in opera le seguenti metriche:
+                                <ul>
+                                    <li><i>RMSE ATE</i>, errore quadratico medio calcolato tra tutti i punti della traiettoria stimata e della traiettoria ideale di riferimento (ground truth);</li>
+                                    <li><i>RMSE RPE</i>, errore quadratico medio calcolato tra tutte le coppie di punti della traiettoria stimata e della traiettoria ideale di riferimento (ground truth).</li>
+                                </ul>
+                                Tali metriche sono state ricavate utilizzando due script di utilità - <code>evaluate_rpe.py</code> ed <code>evaluate_ate.py</code>, presenti nella cartella benchmark su GitHub - reperiti al seguente <a title="Useful tools for the RGB-D benchmark"
+                                href="https://vision.in.tum.de/data/datasets/rgbd-dataset/tools" target="_blank" >
+                                link</a>. Entrambi gli script utilizzano come input due file contenenti, per ciascuna riga, i seguenti attributi:
+                                <ul>
+                                    <li>
+                                        <code>timestamp</code>, il tempo di esecuzione espresso in formato Unix;
+                                    </li>
+                                    <li>
+                                        la tripletta <code>tx</code>, <code>ty</code> e <code>tz</code>, ovvero la posizione del centro ottico della camera RGB - nel rispetto della terna di origine;
+                                    </li>
+                                    <li>
+                                        la quadripletta <code>qx</code>, <code>qy</code>, <code>qz</code> e <code>qw</code>, ovvero l'orientamento del centro ottico della camera RGB espresso in forma di quaterione unitario - nel rispetto della terna di origine.
+                                    </li>
+                                </ul>
+                                I due file precedentemente citati contengono, rispettivamente, le pose assunte dal centro ottico della camera RGB nella realizzazione della traiettoria stimata e le pose assunte dal centro ottico della camera RGB nell'esecuzione della traiettoria ideale (ground truth).<br>
+                                Tali file sono stati ottenuti agilmente a partire da RTAB-Map, che ha un'apposita impostazione di esportazione della traiettoria nel formato sopra descritto (alla voce <code>File &rarr; Export Poses... &rarr; RGBD-SLAM format</code>).<br><br>
+
+                                I percorsi scelti per la valutazione delle performance sono due e consistono in una navigazione in linea retta di 4 metri e in una navigazione in un circuito rettangolare di perimetro 6 metri.
+                            </p>
+                            <h5>Percorso in linea retta di 4 metri</h5>
+                            Nel seguito è illustrato un confronto puramente visivo della traiettoria stimata e della traiettoria ideale. A valle di questa immagine è possibile trovare le tabelle con le metriche RPE e ATE.
+                            <img class='libfreenect' src="rgbd-slam_files/img/line_benchmark.png" width='100%' height='400px'></img>
+                            <table width='400' border='1' align='center'> 
+                                <tr>
+                                    <td style="text-align:center"></td>
+                                    <td style="text-align:center"><b>ATE [m]</b>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>RMSE</b></td>
+                                    <td style="text-align:center">0.149196</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Media</b></td>
+                                    <td style="text-align:center">0.124507</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Mediana</b></td>
+                                    <td style="text-align:center">0.104171</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Deviazione Std.</b></td>
+                                    <td style="text-align:center">0.082204</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Valore Min</b></td>
+                                    <td style="text-align:center">0.023175</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Valore Max</b></td>
+                                    <td style="text-align:center">0.307303</td>
+                                </tr>
+                            </table><br>
+                            <table width='500' border='1' align='center'> 
+                                <tr>
+                                    <td style="text-align:center"></td>
+                                    <td style="text-align:center"><b>RPE (posizionale) [m]</b>
+                                    <td style="text-align:center"><b>RPE (rotazionale) [deg]</b>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>RMSE</b></td>
+                                    <td style="text-align:center">0.286575</td>
+                                    <td style="text-align:center">7.545224</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Media</b></td>
+                                    <td style="text-align:center">0.236531</td>
+                                    <td style="text-align:center">6.129522</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Mediana</b></td>
+                                    <td style="text-align:center">0.210891</td>
+                                    <td style="text-align:center">5.443736</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Deviazione Std.</b></td>
+                                    <td style="text-align:center">0.161797</td>
+                                    <td style="text-align:center">4.399927</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Valore Min</b></td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Valore Max</b></td>
+                                    <td style="text-align:center">1.079218</td>
+                                    <td style="text-align:center">22.370830</td>
+                                </tr>
+                            </table><br>
+                            <h5>Percorso lungo circuito rettangolare di perimetro 6 metri</h5>
+                            Come prima, viene illustrato un confronto puramente visivo della traiettoria stimata e della traiettoria ideale. A valle di questa immagine è possibile trovare le tabelle con le metriche RPE e ATE.
+                            <img class='libfreenect' src="rgbd-slam_files/img/rect_benchmark.png" width='100%' height='400px'>
+                            <table width='400' border='1' align='center'> 
+                                <tr>
+                                    <td style="text-align:center"></td>
+                                    <td style="text-align:center"><b>ATE [m]</b>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>RMSE</b></td>
+                                    <td style="text-align:center">0.228967</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Media</b></td>
+                                    <td style="text-align:center">0.179261</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Mediana</b></td>
+                                    <td style="text-align:center">0.157338</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Deviazione Std.</b></td>
+                                    <td style="text-align:center">0.142449</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Valore Min</b></td>
+                                    <td style="text-align:center">0.021403</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Valore Max</b></td>
+                                    <td style="text-align:center">0.986974</td>
+                                </tr>
+                            </table><br>
+                            <table width='500' border='1' align='center'> 
+                                <tr>
+                                    <td style="text-align:center"></td>
+                                    <td style="text-align:center"><b>RPE (posizionale) [m]</b>
+                                    <td style="text-align:center"><b>RPE (rotazionale) [deg]</b>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>RMSE</b></td>
+                                    <td style="text-align:center">0.949862</td>
+                                    <td style="text-align:center">60.097120</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Media</b></td>
+                                    <td style="text-align:center">0.757373</td>
+                                    <td style="text-align:center">41.878513</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Mediana</b></td>
+                                    <td style="text-align:center">0.627680</td>
+                                    <td style="text-align:center">27.184944</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Deviazione Std.</b></td>
+                                    <td style="text-align:center">0.573257</td>
+                                    <td style="text-align:center">43.102831</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Valore Min</b></td>
+                                    <td style="text-align:center">0</td>
+                                    <td style="text-align:center">0</td>
+                                </tr>
+                                <tr align=”center”>
+                                    <td style="text-align:center"><b>Valore Max</b></td>
+                                    <td style="text-align:center">3.129868</td>
+                                    <td style="text-align:center">178.335200</td>
+                                </tr>
+                            </table><br>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </section><!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner">
+                        <h2 class="heading"></a>Appendice: immagini aggiuntive</h2>
+                        <img class='circuital-scheme' src="rgbd-slam_files/img/robot/photo_2020-06-20_21-32-11.jpg" width='500px' height='600px'></img><br>
+                        <img class='circuital-scheme' src="rgbd-slam_files/img/robot/photo_2020-06-20_21-32-54.jpg" width='500px' height='400px'></img><br>
+                        <img class='circuital-scheme' src="rgbd-slam_files/img/robot/photo_2020-06-20_21-32-21.jpg" width='500px' height='600px'></img><br>
+                        <img class='circuital-scheme' src="rgbd-slam_files/img/robot/photo_2020-06-20_21-32-23.jpg" width='500px' height='600px'></img>
+                    </div><!--//section-inner-->                 
+                </section><!--//section--> 
+            </div><!--//primary-->
+
+			<div class="secondary col-md-4 col-sm-12 col-xs-12">
+                <aside class="info aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Autori</h2>
+                        <div class="content">
+                            <ul>
+                                <li>
+                                    Flavio Biancospino, 59972
+                                </li>
+                                <li>
+                                    Cristian Zampino, 60857
+                                </li>
+                            </ul>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->                 
+                </aside><!--//aside-->                        
+								             
+                <aside class="blog aside section">
+                    <div class="section-inner">
+                        <h2 class="heading">Riferimenti</h2>
+						<div class="content">
+						    <ol>
+                                <li>
+                                    <a title="MARRtino"
+                                    href="http://introlab.github.io/rtabmap/" target="_blank" >
+                                    MARRtino Robot
+                                    </a>
+                                </li>
+                                <li>
+                                    <a title="RTAB-Map"
+                                    href="http://introlab.github.io/rtabmap/" target="_blank" >
+                                    RTAB-Map
+                                    </a>
+                                </li>
+                            </ol>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </aside><!--//section-->                            
+              
+            </div><!--//secondary-->    
+        </div><!--//row-->
+    </div><!--//masonry-->
+    
+    <!-- ******FOOTER****** --> 
+    <footer class="footer">
+        <div class="container text-center">
+                <small class="copyright">This template adapted from <a href="http://themes.3rdwavemedia.com/" target="_blank">3rd Wave Media</a></small>
+        </div><!--//container-->
+    </footer><!--//footer-->
+ 
+ 
+
+ 
+
+</body></html>
