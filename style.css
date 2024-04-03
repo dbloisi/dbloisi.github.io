@@ -2,13 +2,25 @@
 header {
    text-align: center; 
    padding: 20px;
+   background-color: #f5f5dc;
+   font-family: Helvetica;
 }
-/*navigation menu style*/
+/*navigation bar style*/
 nav {
    text-align: center;
    word-spacing: 30px;
-   Padding: 10px;
+   padding: 10px;
+   background-color: #f5f5dc;
+   font-family: Helvetica;   
 }
+
+/*navigation bar button style*/
+nav a {
+   color: #000000;
+   text-decoration: none;
+   font-size: larger;
+}
+
 /*creating the two-column layout*/
 *{
    box-sizing: border-box;
@@ -20,34 +32,28 @@ nav {
 .post-text-box {
    flex: 70%;
    padding: 20px;
+   background-color: #C0C0C0;
 }
 .profile {
-   flex: 70%;
-   padding: 20px;
+   flex: 30%;
+   padding: 20px;   
 }
 /*profile image and heading style*/
 .profile img {
    width: 120px;
    display: block;
-   margin-left: 0;
-   margin-right: 0;
+   margin-left: auto;
+   margin-right: auto;
 }
 .profile h1 {
    text-align: center;
 }
-
-/*navigation bar style*/
-nav {
-   text-align: center;
-   word-spacing: 30px;
-   padding: 10px;
-   background-color: #f5f5dc
+footer {
+   text-align: center; 
+   padding: 20px;
+   background-color: #E57373;
    font-family: Helvetica;
-   
 }
-/*navigation bar button style*/
-nav a {
-   color: #000000;
-   text-decoration: none;
-   font-size: larger;
+footer a {
+   margin-right:20px;
 }
