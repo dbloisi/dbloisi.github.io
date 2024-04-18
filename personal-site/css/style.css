@@ -1,0 +1,197 @@
+* {
+	border-width: 5px;
+}
+
+header {
+  background-color: #0076CC
+}
+
+header h1, h2, p {
+  color: white;
+  font-family: sans-serif;
+}
+
+header a {
+  display:inline-block;
+  width:50px;
+  padding-left: 10px;
+}
+
+nav {
+  border-top-style:solid;
+  border-top-color: #dddddd;
+  overflow: hidden;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  
+  background-color: #dddddd;
+  
+  overflow: hidden;
+  
+
+}
+
+nav li {
+  float: left;
+  border-right: 1px solid white;
+
+}
+
+nav li:last-child {
+  border-right: none;
+}
+
+nav a {
+  display: block;
+  color: black;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  
+  float: left;
+  
+}
+
+nav li a:hover:not(.active) {
+  background-color: gray;
+  color: white;
+}
+
+.active {
+  background-color: #0076CC;
+  color: white;
+}
+
+main {
+  display: flex;
+}
+
+main h1{
+  padding-left: 10px;
+  font-size: 1.5em;
+}
+
+article {
+  width: 60%;
+  font-family: sans-serif;
+  background-color: #0076CC;
+  border-top-style:solid;
+  border-top-color: #dddddd;
+  border-right-style:solid;
+  border-right-color: #dddddd;
+}
+
+section {
+  width: 100%;
+  float: left;
+  border-bottom-style:solid;
+  border-bottom-color: #dddddd;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+section p {
+	padding-right: 10px;
+}
+	
+
+aside {
+  flex-grow: 1;
+  font-family: sans-serif;
+  background-color: #0076CC;
+  border-top-style:solid;
+  border-top-color: #dddddd;
+  padding-left: 10px;
+  border-bottom-style:solid;
+  border-bottom-color: #dddddd;
+}
+
+footer {
+  clear: both;
+  text-align: center;
+  padding: 3px;
+  background-color: DarkSalmon;
+  color: white;
+}
+
+/* Create three unequal columns that floats next to each other */
+.column {  
+  float: left;
+}
+
+.left {
+  width: 20%;  
+}
+
+.middle {
+  width: 25%;
+}
+
+.middle h1, h2, p {
+	padding-left: 10px;
+}
+
+.right {
+  width: 55%;
+}
+
+.right p {
+  padding-left: 50px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    width: 100%;
+  }
+}
+
+#navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+#navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
