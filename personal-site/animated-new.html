@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+	
+	  
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+		
+      }
+	  
+	  a:link {color: #04AA6D;}
+      a:active {color: #000000;} /* i link attivi sono neri */
+      a:visited {color: #cccccc;} /* i link già visitati sono verdi */
+
+      .header {
+        background-color: #0076CC;
+		z-index: 1;
+      }
+
+      .header h1, h2, p {
+        color: white;
+        font-family: sans-serif;
+      }
+
+      .header a {
+        display:inline-block;
+        width:50px;
+        padding-left: 10px;
+      }
+
+      .column {  
+        float: left;
+      }
+
+      .left {
+        width: 20%;  
+      }
+
+      .left img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .middle {
+        width: 25%;
+      }
+
+.middle h1, h2, p {
+	padding-left: 10px;
+}
+
+      .email img {
+        vertical-align:middle;
+		padding-left: 5px;
+	  }
+	  
+	  .find-out-more {
+        padding-bottom: 5px;
+	  }
+	  
+	  .find-out-more img {
+        vertical-align:middle;
+		padding-left: 10px;
+	  }
+	  
+	  
+
+.right {
+  width: 55%;
+}
+
+.right p {
+  padding-left: 50px;
+}
+
+/* Clear floats after the columns */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    width: 100%;
+  }
+  .middle {
+    text-align: center;
+  }
+  .email {
+    margin-left: -150px;
+  }
+  .right {
+    text-align: center;
+  }
+  .right img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .right p {
+    padding-left: 0px;
+  }
+}
+
+.main-row {
+  margin: 0;
+  background-color: #dddddd;
+}
+
+/* Create two unequal columns that floats next to each other */
+.main-column {
+  float: left;
+  margin-top: 2px;
+  margin-left: 0px;
+  margin-right: 3px;
+  margin-bottom: 0px;
+  /*background: linear-gradient(#0076CC, #2a5caa, #C1001F);*/
+  background: linear-gradient(-45deg, #0076CC, #2a5caa, #C1001F);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+.main-left {
+  width: 75%;
+}
+
+.main-right {
+  width: calc(25% - 6px);
+}
+
+/* Clear floats after the columns */
+.main-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .main-column {
+    width: 100%;
+  }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+footer {
+  clear: both;
+  text-align: center;
+  padding: 3px;
+  background-color: #0076CC;
+  color: white;
+}
+
+.content {
+  padding: 16px;
+}
+
+section {
+  /*background-color: #04AA6D;*/
+  color: white;
+  margin:5px;
+}
+
+.project-row {
+  margin-bottom: 10px;
+}
+
+/* Create two unequal columns that floats next to each other */
+.project-column {
+  float: left;
+}
+
+.project-left {
+  width: 15%;
+  padding-left: 10px;
+}
+
+.project-left p {
+  padding-left: 0px;
+  padding-right: 10px;
+}
+
+.project-right {
+  width: calc(85% - 10px);
+  
+}
+
+
+
+/* Clear floats after the columns */
+.project-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .project-column {
+    width: 100%;
+  }
+  
+
+  .project-right iframe, img {
+    padding-left: 10px;
+	padding-bottom: 15px;
+	padding-top: 5px;
+  }
+}
+
+.videowrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+
+.videowrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+  
+  #navbar {
+      overflow: hidden;
+      background-color: #2a5caa;
+      border-top-style:solid;
+      border-top-color: #dddddd;
+	  z-index:1;
+    }
+
+#navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#navbar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+.sticky {
+	
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+
+     overflow: hidden;
+      background-color: #2a5caa;
+      border-top-style:solid;
+      border-top-color: #dddddd;
+}
+
+.sticky a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  /*border-right: 1px solid white;*/
+}
+
+.sticky a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.sticky a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.articolo {	
+  scroll-margin-top: 4em;
+}
+
+@media screen and (max-width: 800px) {
+  .articolo {	
+    scroll-margin-top: 7em;
+  }
+}
+
+
+
+    </style>
+
+
+    <title>
+	  Domenico Bloisi's home page
+	</title>
+  
+  </head>
+
+  <body>
+
+    <header class="header">
+	    <div class="column left">
+		  <figure>
+            <img src="img/bloisi-nao.jpg"
+			     alt="Domenico Bloisi"
+				 height="200">
+          </figure>
+		</div>
+		
+		<div class="column middle">
+		  <h1>
+	        Domenico D. Bloisi
+	      </h1>
+	      <h2>
+	        Associate Professor
+	      </h2>
+	      <p>
+		    <div class="email">
+		      <img src="img/email-icon.png" height=32>
+			
+	          <a href="mailto:domenico.bloisi@unint.eu">domenico.bloisi@unint.eu</a>
+			</div>
+	      </p>
+		  <a href="" target="new" title="Domenico Bloisi's linkedin account"> 
+			<img src="img/linkedin-icon.png" height=32>
+		  </a>
+		  <a href="" target="new" title="github"> 
+			<img src="img/github-icon.png" height=32>
+		  </a>
+          <a href="https://www.youtube.com/@domenicobloisi6342" target="new" title="youtube"> 
+			<img src="img/youtube-icon.png" height=32>
+		  </a>
+		</div>
+		<div class="column right">
+		  <figure>
+            <img src="img/logo-unint.png"
+			     alt="Logo UNINT"
+				 height="100">
+          </figure>
+		  <p>
+	        Department of International<br>
+			Humanities and Social Sciences
+	      </p>
+		  <p>
+		     International University of Rome<br>
+			 UNINT
+		  </p>
+		</div>
+	 	
+    </header>
+
+    <nav id="navbar">
+      <a class="active" href="javascript:void(0)">Home</a>
+	  <a href="#about">About</a>
+      <a href="#research">Research</a>
+	  <a href="#publications">Publications</a>
+	  <a href="#teaching">Teaching</a>
+	  <a href="#tutorials">Tutorials</a>
+	  <a href="#events">Events</a>
+      <a href="#contact">Contact</a>
+      
+    </nav>
+
+    <main class="main-row">
+      <section class="main-column main-left" style="background-color:#aaa;">
+        
+		<article class="articolo" id="about">
+		<h2>About</h2>
+        <p>I'm Associate Professor for Artificial Intelligence at the
+						Department of International Humanities and Social Sciences</a>,
+					<a href="https://www.unint.eu/en/" target="_blank">International University of Rome UNINT</a>.
+					
+					<p>My academic interests include artificial intelligence, robot vision, medical image analysis,
+                               and steganography.
+                            </p>
+							
+							<p>I collaborate with the
+                               <a href="http://spqr.diag.uniroma1.it/" target="_blank">SPQR Robot Soccer Team</a>
+                               at the <a href="http://www.dis.uniroma1.it/index.php?lang=en" target="_blank">
+                               Department of Computer, Control, and Management Engineering</a> at
+                               <a href="http://www.uniroma1.it" target="_blank">Sapienza University of Rome</a>.
+                            </p>
+					
+					<p>From December 2018 to June 2023 I was with the
+						<a href="http://dimie.unibas.it/site/home.html" target="_blank">
+				    Department of Mathematics, Informatics, and Economics (DiMIE)</a>,
+					<a href="http://portale.unibas.it/site/home.html" target="_blank">University of Basilicata</a>.
+			    
+                            <p>From February 2017 to November 2018, I was with
+                               the <a href="http://www.di.univr.it" target="_blank">Department of Computer Science</a>
+                               at <a href="http://www.univr.it" target="_blank">University of Verona</a>
+                               as fixed-term assistant professor, working on the HORIZON2020 project
+                               <a href="http://intcatch.eu/" target="_blank">INTCATCH</a>.
+                            </p>
+							
+							<p>Previously, I was with
+                               the <a href="http://www.dis.uniroma1.it/index.php?lang=en" target="_blank">
+                               Department of Computer, Control, and Management Engineering</a> at
+                               <a href="http://www.uniroma1.it" target="_blank">Sapienza University of Rome</a>
+                               as fixed-term assistant professor.
+                            </p>
+							
+                            
+							
+							<p>
+							
+							
+				    <div class="find-out-more">
+		    <img src="img/find-out-more-icon.png" height=32>
+			
+	        <a href="aboutme/aboutme.html">Find out more about me</a>
+			        </div>
+			
+	      </p>
+							
+		</article>
+		
+		<hr>
+		
+		<article class="articolo" id="research">
+		<h2>Research</h2>
+		
+		
+		<div class="project-row"> 
+		  <div class="project-column project-left">
+		    <a href="https://spqr.diag.uniroma1.it/" target="new" title="SPQR Team robot soccer">Robot soccer</a>
+			
+			<p>My research is focussed on developing software for soccer robots participating in RoboCup competitions.</p>
+			
+		  </div>
+		  
+		  <div class="project-column project-right">
+		    <div class="videowrapper">
+		    <iframe
+  width="400" height="226"
+  src=https://www.youtube.com/embed/2mekxYbc6b4
+  title="RoboCup 2023 highlights - SPQR Team"
+  frameborder="0"
+  allow="accelerometer;
+    autoplay;
+    clipboard-write;
+    encrypted-media;
+    gyroscope;
+    picture-in-picture;
+    web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+            </iframe>
+			</div>
+          </div>   
+        
+		</div>
+		
+		
+			
+		<div class="project-row"> 
+		  <div class="project-column project-left">
+		    <a href="https://youtu.be/l7Ujij0Y81g" target="new" title="Peg in hole robot vision">Robot vision</a>
+			
+			
+		  </div>
+		  
+		  <div class="project-column project-right">
+		    <iframe width="400" height="226" src="https://www.youtube.com/embed/l7Ujij0Y81g" title="Peg-In-Hole Using 3D Workpiece Reconstruction and CNN-Based Hole Detection IROS 2020" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>   
+        
+		</div>
+		
+		
+		
+		
+		<div class="project-row"> 
+		  <div class="project-column project-left">
+		    <a href="https://sites.google.com/unibas.it/orca/" target="new" title="ORCA ORal Cancer Annotated dataset">Medical image analysis</a>
+		  </div>
+		  
+		  <div class="project-column project-right">
+		    <img src="img/med-image.png"/>
+		  </div>
+		</div>
+		
+		<div class="project-row"> 
+		  <div class="project-column project-left">
+		    <a href="https://youtu.be/l7Ujij0Y81g" target="new" title="intelligent surveillance">Intelligent surveillance</a>
+			
+			
+		  </div>
+		  
+		  <div class="project-column project-right">
+		    <iframe width="400" height="226" src="https://www.youtube.com/embed/y53uxgaIINg" title="people detection with IMBS-MT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>   
+        
+		</div>
+		
+		<div class="find-out-more">
+		    <img src="img/find-out-more-icon.png" height=32>
+			
+	        <a href="research/research.html">Find out more about my research</a>
+			        </div>
+		
+		
+		</article>
+		
+		
+		</section>
+		
+		
+	  
+	  
+      
+	  <aside class="main-column main-right" style="background-color:#bbb;">
+        <article class="articolo" id="contact">
+		<h2>Contact</h2>
+        <p>Prof. Domenico Daniele Bloisi</p>
+                               <p><i>Dipartimento di Scienze Umane e Sociali Internazionali</i></p>
+							   <p>Universit&agrave; degli Studi Internazionali di Roma - UNINT</p>
+							   <p>Via Cristoforo Colombo, 200 - 00147 Rome (Italy)</p>
+							
+							<!-- <p><b>Location:</b> Building 3D, 2nd floor, room 15</p> -->
+							
+							<p><b>Office Hours:</b> send an email to arrange an appointment.</p>
+							
+							<p>Email: <a href="mailto:domenico.bloisi@unint.eu">domenico.bloisi@unint.eu</a></p>
+		</article>
+		
+		<hr>
+		
+		<article class="articolo" id="publications">
+		<h2>Publications</h2>
+        <p>
+							<a href="https://www.scopus.com/authid/detail.uri?authorId=57189023230" target="_blank">
+							My Scopus profile
+							</a>
+							</p>
+							<p>
+							<a href="https://scholar.google.it/citations?user=k5jKx9gAAAAJ&hl" target="_blank">
+							My Google Scholar profile
+							</a>
+							</p>
+		</article>
+		
+		<article class="articolo" id="tutorials">
+		
+		<h2>Tutorials</h2>
+        <p>
+							<a href="tutorials/balldetection.html" target="_blank">
+							How to Use OpenCV for Ball Detection</a>
+							</p>
+							<p>
+							<a href="tutorials/come-scrivere-la-tesi-di-laurea.html" target="_blank">
+							Come scrivere la tesi di laurea </a>
+							</p>
+							
+							<div class="videowrapper">
+							<iframe
+								
+								src="https://www.youtube.com/embed/2G1YzcPCYs0"
+								frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+							</iframe>
+							</div>
+							
+							
+						
+		</article>
+		
+      </aside>
+    </main>
+
+    
+	<footer>
+      <p>Domenico D. Bloisi<br>
+	  <p>Associate professor UNINT<br><br>
+      <a href="mailto:domenico.bloisi@unint.eu">domenico.bloisi@unint.eu</a>
+	  </p>
+    </footer>	
+  
+
+
+<script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
+
+</body>
+</html>
