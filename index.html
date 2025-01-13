@@ -3,19 +3,44 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="personal-site/stile.css">
+	
+	<link rel="stylesheet" href="personal-site/stile.css">
 	
 	<link rel="shortcut icon" href="personal-site/img/dbloisi.ico">
 
+    
 
     <title>
 	  Domenico Bloisi's home page
 	</title>
   
-  </head>
+  
+  <script>
+        var myVar;
 
-  <body>
+        function facciaRotante() {
+            myVar = setTimeout(showPage, 1000);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "block";
+        }
+    </script>
+
+  </head> 
+
+  <body onload="facciaRotante()">
+
+    <div id="loader">
+        <span> <img src="assets/images/dbloisi.png" alt="Domenico D. Bloisi" /></span>
+    </div>
+
+    <div style="display:none;" id="myDiv" class="animate-bottom">
+       
+
+    
+	
 
     <header class="header">
 	    <div class="column left">
@@ -518,6 +543,8 @@ function myFunction() {
   }
 }
 </script>
+
+</div>
 
 </body>
 </html>
