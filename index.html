@@ -15,17 +15,21 @@
 	</title>
   
   
-  <script>
-        var myVar;
+    <script>
+      var myVar;
 
-        function facciaRotante() {
-            myVar = setTimeout(showPage, 1000);
-        }
+      function facciaRotante() {
+        myVar = setTimeout(showPage, 1000);
+      }
 
-        function showPage() {
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("myDiv").style.display = "block";
-        }
+      function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+      }
+		
+	  window.onscroll = function() {sticking()};
+
+      
     </script>
 
   </head> 
@@ -47,7 +51,7 @@
 		  <figure>
             <img src="personal-site/img/bloisi-nao.jpg"
 			     alt="Domenico Bloisi"
-				 height="200">
+				 height="180">
           </figure>
 		</div>
 		
@@ -86,7 +90,7 @@
 		  <figure>
             <img src="personal-site/img/logo-unint.png"
 			     alt="Logo UNINT"
-				 height="100">
+				 height="80">
           </figure>
 		  <p>
 	        Department of International<br>
@@ -100,7 +104,7 @@
 	 	
     </header>
 
-    <nav id="navbar">
+    <nav class="subnav" id="navbar">
       <a href="">Home</a>
 	  <a href="#about">About</a>
       <a href="#research">Research</a>
@@ -109,6 +113,9 @@
 	  <a href="#tutorials">Tutorials</a>
 	  <a href="#seminars">Seminars</a>
       <a href="#contact">Contact</a>
+	  <a href="javascript:void(0);" class="icon" onclick="hamburger()">
+        <i class="fa fa-bars"></i>
+      </a>
       
     </nav>
 
@@ -525,25 +532,32 @@
           
       
 	  
-    </footer>	
-  
+    </footer>
+	
+	<script>
+      var navbar = document.getElementById("navbar");
+      var sticky = navbar.offsetTop;
 
-
-<script>
-window.onscroll = function() {myFunction()};
-
-var navbar = document.getElementById("navbar");
-var sticky = navbar.offsetTop;
-
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
+      function sticking() {
+        if (window.pageYOffset >= sticky) {
+          navbar.classList.add("sticky")
+        }
+		else {
+          navbar.classList.remove("sticky");
+        }
+      }
+	  
+	  /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+function hamburger() {
+  var x = document.getElementById("navbar");
+  if (x.className === "subnav") {
+    x.className += " responsive";
   } else {
-    navbar.classList.remove("sticky");
+    x.className = "subnav";
   }
 }
-</script>
-
+    </script>	
+  
 </div>
 
 </body>
