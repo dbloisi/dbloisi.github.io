@@ -89,6 +89,7 @@ body {
   }
   .middle {
     text-align: center;
+	font-size: 90%;
   }
   .email {
     margin-left: -150px;
@@ -105,7 +106,7 @@ body {
     padding-left: 0px;
   }
   .social { 
-        display: none; 
+        /*display: none;*/ 
     }
 }
 
@@ -367,7 +368,7 @@ section {
   display: block;
   color: yellow;
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 10px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -402,7 +403,7 @@ section {
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  /*padding: 14px 16px;*/
   text-decoration: none;
   font-size: 17px;
 }
